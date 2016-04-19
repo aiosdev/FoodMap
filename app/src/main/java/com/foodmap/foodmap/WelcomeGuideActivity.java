@@ -49,7 +49,7 @@ public class WelcomeGuideActivity extends AppCompatActivity implements View.OnCl
             View view = LayoutInflater.from(this).inflate(pics[i], null);
 
             if (i == pics.length - 1) {
-                startBtn = (Button) view.findViewById(R.id.bt_enter);
+                startBtn = (Button) view.findViewById(R.id.bt_login);
                 startBtn.setTag("enter");
                 startBtn.setOnClickListener(this);
             }

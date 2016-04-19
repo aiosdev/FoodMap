@@ -10,7 +10,7 @@ import com.foodmap.foodmap.utils.SpUtils;
 
 /**
  * @desc 启动屏
- * Created by devilwwj on 16/1/23.
+ * Created by yeahecho on 16/1/23.
  */
 public class SplashActivity extends Activity {
     @Override
@@ -20,6 +20,7 @@ public class SplashActivity extends Activity {
         boolean isFirstOpen = SpUtils.getBoolean(this, AppConstants.FIRST_OPEN);
         // 如果是第一次启动，则先进入功能引导页
         if (!isFirstOpen) {
+//        if (isFirstOpen) {
             Intent intent = new Intent(this, WelcomeGuideActivity.class);
             startActivity(intent);
             finish();

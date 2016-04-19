@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">FoodMap</string>
     <string name="hello">Hello Foodmapyoyoyo! and taooooo and yyyyyyyyyy</string>
-    <string name="en_buttonTest1">BUTTON1</string>
-    <string name="cn_buttonTest1">按钮1</string>
-    <string name="fr_buttonTest1">BOUTON1</string>
+    <string name="buttonTest1">BUTTON1</string>
 </resources>

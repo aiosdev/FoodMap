@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //bt1.setText(getString(R.string.cn_buttonTest1));
 
+                /*
                 //获取天气信息xml文件
                 InputStream is = getClassLoader().getResourceAsStream("assets/init.xml");//方法1：读取assets文件夹中的xml文件
                 //InputStream is = getClassLoader().getResourceAsStream("/app/src/weather.xml");
@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+
+                //bt1.setText(getString(R.string.en_buttonTest1));
                 if("en".equals(globalInstant.getLanguage())){
                     bt1.setText(getString(R.string.en_buttonTest1));
                 }
@@ -71,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
                 if("fr".equals(globalInstant.getLanguage())){
                     bt1.setText(getString(R.string.fr_buttonTest1));
                 }
-
+                */
             }
+
 
         });
     }

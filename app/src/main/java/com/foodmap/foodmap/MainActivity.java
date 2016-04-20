@@ -1,11 +1,13 @@
 package com.foodmap.foodmap;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
 
+import com.foodmap.provider.DBHelper;
 import com.foodmap.provider.Global;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -15,6 +17,7 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity {
     private Button bt1;
     private Global globalInstant;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
         bt1 = (Button) findViewById(R.id.bt1);
         globalInstant = new Global();
 
+        // 创建DBHelper对象，指定数据库版本为1，此处使用相对路径即可，
+        // 数据库文件自动会保存在程序的数据文件夹的databases目录下。
+        dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

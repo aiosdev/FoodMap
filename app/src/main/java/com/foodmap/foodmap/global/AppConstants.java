@@ -1,7 +1,7 @@
 package com.foodmap.foodmap.global;
 
 /**
- * Created by devilwwj on 16/1/23.
+ * Created by yeahecho  on 16/4/19.
  */
 public class AppConstants {
 

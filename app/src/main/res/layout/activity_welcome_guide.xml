@@ -17,14 +17,15 @@
                    android:id="@+id/vp_guide"
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"/>
-                    />
+
         </FrameLayout>
 
         <Button
             android:id="@+id/bt_enter"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/ll"
@@ -38,21 +39,21 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="bottom"
                 android:clickable="true"
                 android:padding="10.0dip"
                 android:src="@drawable/dot_selector"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="bottom"
                 android:clickable="true"
                 android:padding="10.0dip"
                 android:src="@drawable/dot_selector"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="bottom"
                 android:clickable="true"
                 android:padding="10.0dip"
                 android:src="@drawable/dot_selector"/>

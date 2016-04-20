@@ -26,13 +26,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLES_TABLE_NAME + " ("
                 + Restaurant._ID + " INTEGER PRIMARY KEY,"
-                + Restaurant.NAME + " TEXT"
-                + Restaurant.ADDRESS + " TEXT"
-                + Restaurant.POSTAL + " TEXT"
-                + Restaurant.TELEPHONE + " TEXT"
-                + Restaurant.PICTURE + " TEXT"
+                + Restaurant.NAME + " TEXT,"
+                + Restaurant.ADDRESS + " TEXT,"
+                + Restaurant.POSTAL + " TEXT,"
+                + Restaurant.TELEPHONE + " TEXT,"
+                + Restaurant.PICTURE + " TEXT,"
                 + Restaurant.DESCRIPTION + " TEXT"
                 + ");");
+
+        db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ?)"
+                , new String[]{"chinese food" , "3398 sherbrook montreal", "H4G 1U3", "123456789", "cn.pnp", "this is a chinese restaurant"});
         System.out.println("create RestaurantTbl sucess !");
         /*
         db.execSQL("CREATE TABLE " + TABLES_TABLE_NAME2 + " ("

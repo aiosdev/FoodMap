@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">FoodMap</string>
     <string name="hello">Hello Foodmapyoyoyo! and taooooo and yyyyyyyyyy</string>
-    <string name="buttonTest1">BUTTON1</string>
-    <string name="enter">start开始体验</string>
+    <string name="button_select">SELECT</string>
+    <string name="button_get_barcode">SEARCH</string>
+    <string name="button_return">RETURN</string>
+
+    <string name="enter">START</string>
+
+    <string name="rb_tab1_name">Restaurant</string>
+    <string name="rb_tab2_name">Search</string>
+    <string name="rb_tab3_name">Location</string>
+    <string name="rb_tab4_name">Setting</string>
+    <string name="rb_tab5_name">User Center</string>
 </resources>

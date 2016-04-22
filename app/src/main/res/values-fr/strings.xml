@@ -2,5 +2,15 @@
 <resources>
     <string name="app_name">Plan Du Restaurant Chinois </string>
     <string name="hello">bonjour Foodmapyoyoyo! and taooooo and yyyyyyyyyy</string>
-    <string name="buttonTest1">bouton1</string>
+    <string name="button_select">sélectionner</string>
+    <string name="button_get_barcode">chercher</string>
+    <string name="button_return">retourner</string>
+
+    <string name="enter">DEMARRER</string>
+
+    <string name="rb_tab1_name">Restaurant</string>
+    <string name="rb_tab2_name">Chercher</string>
+    <string name="rb_tab3_name">Location</string>
+    <string name="rb_tab4_name">Configuration</string>
+    <string name="rb_tab5_name">usager Centre</string>
 </resources>

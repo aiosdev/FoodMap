@@ -10,4 +10,7 @@
     <color name="listview_bg_gray">#ffecedef</color>
     <color name="listview_txt_gray">#ff8a8a8a</color>
     <color name="checkbox_fg_gray">#ff8a8a8a</color>
+    <color name="Indigo_colorPrimaryDark">#303f9f</color>
+    <color name="Indigo_colorPrimary">#3f51b5</color>
+    <color name="Indigo_nav_color">#4675FF</color>
 </resources>

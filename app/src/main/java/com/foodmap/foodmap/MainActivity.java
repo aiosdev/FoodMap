@@ -1,23 +1,35 @@
 package com.foodmap.foodmap;
 
+import android.app.Activity;
 import android.app.TabActivity;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 
 import com.foodmap.provider.DBHelper;
 import com.foodmap.provider.Global;
+import com.foodmap.provider.Restaurant;
 
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.SimpleAdapter;
 import android.widget.TabHost;
 import android.content.Intent;
+import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParser;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends TabActivity {
     private Button bt1;
@@ -50,6 +62,10 @@ public class MainActivity extends TabActivity {
     private RadioButton btn_4;
     private RadioButton btn_5;
 
+    //
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +75,15 @@ public class MainActivity extends TabActivity {
 
         // 创建DBHelper对象，指定数据库版本为1，此处使用相对路径即可，
         // 数据库文件自动会保存在程序的数据文件夹的databases目录下。
-        dbHelper = new DBHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+
+
+
+
+
+//        simpleAdapter = new SimpleAdapter(getApplicationContext(), list,R.layout.item_listview, R.layout )；
+
+
 
         // //////////////////init ///////////////////////////
 
@@ -95,7 +118,6 @@ public class MainActivity extends TabActivity {
         btn_3.setOnClickListener(listener);
         btn_4.setOnClickListener(listener);
         btn_5.setOnClickListener(listener);
-
 
 
  /*
@@ -156,6 +178,19 @@ public class MainActivity extends TabActivity {
 
         });
         */
+    }
+
+
+
+
+    private void getDataInfo() {
+
+        Thread t = new Thread(){
+            public void run(){
+                super.run();
+            }
+        };
+        t.start();
     }
 
     class MyRadioButtonClickListener implements View.OnClickListener {

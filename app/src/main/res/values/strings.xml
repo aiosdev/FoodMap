@@ -12,4 +12,16 @@
     <string name="rb_tab3_name">Location</string>
     <string name="rb_tab4_name">Setting</string>
     <string name="rb_tab5_name">User Center</string>
+
+    <string-array name="res_kind">
+        <item>hotpot</item>
+        <item>Northern food</item>
+        <item>special snacks</item>
+        <item>Sichuan food</item>
+        <item>Cantonese food</item>
+        <item>Japanese and Korean cuisine</item>
+        <item>Cooked wheaten food</item>
+        <item>buffet</item>
+      </string-array>
+
 </resources>

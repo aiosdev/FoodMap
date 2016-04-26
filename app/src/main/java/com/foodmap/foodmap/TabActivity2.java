@@ -22,7 +22,7 @@ public class TabActivity2 extends ActionBarActivity {
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private ListView lvLeftMenu;
-	private String[] lvs = {"List Item 01", "List Item 02", "List Item 03", "List Item 04"};
+	private String[] lvs ;  //菜单分类列表
 	private ArrayAdapter arrayAdapter;
 	private ImageView ivRunningMan;
 	private AnimationDrawable mAnimationDrawable;
@@ -57,6 +57,7 @@ public class TabActivity2 extends ActionBarActivity {
 		mDrawerToggle.syncState();
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 		//设置菜单列表
+		lvs = this.getResources().getStringArray(R.array.res_kind);
 		arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, lvs);
 		lvLeftMenu.setAdapter(arrayAdapter);
 	}

@@ -18,37 +18,5 @@ public class Restaurant implements BaseColumns {
     public static final String PICTURE = "pic";					//门脸图片
     public static final String DESCRIPTION= "desc";	        // 描述
 
-    public static String getNAME() {
-        return NAME;
-    }
 
-    public static String getADDRESS() {
-        return ADDRESS;
-    }
-
-    public static String getPOSTAL() {
-        return POSTAL;
-    }
-
-    public static String getTELEPHONE() {
-        return TELEPHONE;
-    }
-
-    public static String getPICTURE() {
-        return PICTURE;
-    }
-
-    public static String getDESCRIPTION() {
-        return DESCRIPTION;
-    }
-
-    @Override
-    public String toString() {
-        return "Restaurant{}";
-    }
-
-    public Restaurant(String NAME, String ADDRESS, String POSTAL, String PICTURE, String TELEPHONE) {
-
-
-    }
 }

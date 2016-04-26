@@ -23,7 +23,7 @@ public class TabActivity1 extends Activity {
 
 	private ListView listView = null;
 	private ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-	List<Restaurant> restaurantsList;
+	List<RestaurantTbl> restaurantsList;
 	DBHelper dbHelper;
 
 	@Override
@@ -31,7 +31,7 @@ public class TabActivity1 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab_1);
 
-		restaurantsList = new ArrayList<Restaurant>();
+		restaurantsList = new ArrayList<RestaurantTbl>();
 		dbHelper = new DBHelper(this);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -44,7 +44,7 @@ public class TabActivity1 extends Activity {
 			String PICTURE = cursor.getColumnName(5);
 			String TELEPHONE = cursor.getColumnName(4);
 
-			Restaurant restaurant = new Restaurant(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE);
+			RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE);
 			restaurantsList.add(restaurant);
 		}
 
@@ -61,7 +61,7 @@ public class TabActivity1 extends Activity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			Restaurant restaurant = restaurantsList.get(position);
+			RestaurantTbl restaurant = restaurantsList.get(position);
 
 			View view = null;
 			view = View.inflate(TabActivity1.this, R.layout.item_listview, null);
@@ -85,7 +85,5 @@ public class TabActivity1 extends Activity {
 		public long getItemId(int position) {
 			return 0;
 		}
-
-
 	}
 }

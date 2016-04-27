@@ -3,6 +3,7 @@ package com.foodmap.foodmap;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,8 @@ public class TabActivity1 extends Activity {
 
 			View view = null;
 			view = View.inflate(TabActivity1.this, R.layout.item_listview, null);
-//			ImageView iv = (TextView) view.findViewById(R.id.iv);
-//            iv.setText(restaurant.getPICTURE());
+			ImageView iv = (ImageView) view.findViewById(R.id.iv);
+            iv.setImageURI(Uri.parse(restaurant.getImageUrl()));
 			TextView tv_title = (TextView) view.findViewById(R.id.tv_title);
 			tv_title.setText(restaurant.getNAME());
 			TextView tv_number = (TextView) view.findViewById(R.id.tv_number);

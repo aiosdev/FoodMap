@@ -8,7 +8,7 @@ public class RestaurantTbl {
     private String NAME;
     private String TELEPHONE;
     private String ADDRESS;
-    private String PICTURE;
+    private String imageUrl;
     private String POSTAL;
 
     public String getNAME() {
@@ -27,12 +27,12 @@ public class RestaurantTbl {
         this.ADDRESS = ADDRESS;
     }
 
-    public String getPICTURE() {
-        return PICTURE;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setPICTURE(String PICTURE) {
-        this.PICTURE = PICTURE;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getPOSTAL() {
@@ -57,11 +57,11 @@ public class RestaurantTbl {
         return "RestaurantTbl{}";
     }
 
-    public RestaurantTbl(String NAME, String TELEPHONE, String ADDRESS, String PICTURE, String POSTAL) {
+    public RestaurantTbl(String NAME, String TELEPHONE, String ADDRESS, String imageUrl, String POSTAL) {
         this.NAME = NAME;
         this.TELEPHONE = TELEPHONE;
         this.ADDRESS = ADDRESS;
-        this.PICTURE = PICTURE;
+        this.imageUrl = imageUrl;
         this.POSTAL = POSTAL;
     }
 

@@ -6,16 +6,14 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="75dp"
+        android:layout_height="75dp" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="123"
-        android:textSize="24sp"
         android:layout_toRightOf="@+id/iv"
         android:lines="1"/>
 
@@ -24,7 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="123"
-        android:textSize="20sp"
         android:layout_below="@+id/tv_title"
         android:layout_toRightOf="@+id/iv"
         android:lines="1"/>
@@ -34,8 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="123"
-        android:textSize="20sp"
         android:layout_below="@+id/tv_number"
         android:layout_toRightOf="@+id/iv"
-        android:lines="2"/>
+        android:lines="1"/>
 </RelativeLayout>

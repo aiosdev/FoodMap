@@ -35,8 +35,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 + ");");
 
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ?)"
-                , new String[]{"chinese food" , "3398 sherbrook montreal", "H4G 1U3", "123456789", "cn.pnp", "this is a chinese restaurant"});
-        db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ?)"
                 , new String[]{"UCAN有间茶餐厅" , "1832 Saint-Catherine Ouest Montreal,QC", "H3H 1M1", "5143122938", "ucan.jpg", "茶餐厅，粤菜"});
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ?)"
                 , new String[]{"Lina Restaurant（西安名吃）" , "1051 Boul St.-Laurent Montréal, QC", "H2Z 1J6", "5145689599 ", "lina.jpg", "西安名吃"});
@@ -45,7 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ?)"
                 , new String[]{"川味香" , "2350 rue Guy Montréal, QC", "H3H 2M2", "5149335041", "chuanweixiang.jpg", "水煮鱼,孜然鸡,香辣虾,脆皮牛肉,脆皮茄子"});
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ?)"
-                , new String[]{"高老庄 Mr.Gao Restaurant" , "1550 Maisonneure O, GM001， Montreal QC", "H3G", "514-989-8887 ", "gaojpg", "东北菜，川菜"});
+                , new String[]{"高老庄 Mr.Gao Restaurant" , "1550 Maisonneure O, GM001， Montreal QC", "H3G", "514-989-8887 ", "gao.jpg", "东北菜，川菜"});
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ?)"
                 , new String[]{"大唐火锅" , "2070 de maisonneuve west, montreal, QC", "H3H 1K8", "514-935-977", "datang.jpg", "正宗重庆麻辣火锅，自助任吃。麻辣香锅，重庆小面，精品川菜"});
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ?)"

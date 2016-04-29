@@ -17,6 +17,7 @@ public class Restaurant implements BaseColumns {
     public static final String TELEPHONE = "tel";				//电话
     public static final String PICTURE = "pic";					//门脸图片
     public static final String DESCRIPTION= "desc";	        // 描述
+    public static final String RESKIND= "kind";	        // 分类
 
 
 }

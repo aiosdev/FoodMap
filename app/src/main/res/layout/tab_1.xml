@@ -1,52 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <!--Toolbar-->
+    <include layout="@layout/custom_toolbar" />
+    <!--DrawerLayout-->
+    <include layout="@layout/custom_drawerlayout" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-        <Button
-            android:id="@+id/button_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="@string/button_select" />
 
-        <Button
-            android:id="@+id/button_get_barcode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/button_select"
-            android:text="@string/button_get_barcode" />
-
-        <Button
-            android:id="@+id/button_return"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/button_get_barcode"
-            android:text="return" />
-
-    </RelativeLayout>
-
-    <ListView
-        android:id="@+id/lv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </ListView>
-
+    </LinearLayout>
 </LinearLayout>
+
+
+
 

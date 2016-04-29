@@ -11,6 +11,14 @@
             android:id="@+id/iv_main"
             android:layout_width="100dp"
             android:layout_height="100dp" />
+
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </ListView>
     </LinearLayout>
     <!--侧滑菜单-->
     <LinearLayout

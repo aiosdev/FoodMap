@@ -1,6 +1,5 @@
 package com.foodmap.foodmap;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
@@ -9,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -21,14 +19,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foodmap.provider.DBHelper;
-import com.foodmap.provider.Restaurant;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -39,9 +34,9 @@ public class TabActivity1 extends ActionBarActivity  {
 
     private ListView listView = null;
     private ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-    List<RestaurantTbl> restaurantsList;
+    //List<RestaurantTbl> restaurantsList;
     DBHelper dbHelper;
-    ListAdapter MyAdapter;
+    MyAdapter myAdapter;
 
     //声明滑动菜单相关变量
     private Toolbar toolbar;
@@ -93,7 +88,7 @@ public class TabActivity1 extends ActionBarActivity  {
 
         /*  处理滑动菜单结束     */
 
-        restaurantsList = new ArrayList<RestaurantTbl>();
+        List<RestaurantTbl> restaurantsListTemp = new ArrayList<RestaurantTbl>();
         dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -109,13 +104,13 @@ public class TabActivity1 extends ActionBarActivity  {
             System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + PICTURE);
 
             RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE);
-            restaurantsList.add(restaurant);
+            restaurantsListTemp.add(restaurant);
         }
 
         listView = (ListView) findViewById(R.id.lv);
-        MyAdapter = new MyAdapter(this);
+        myAdapter = new MyAdapter(restaurantsListTemp, this);
 
-        listView.setAdapter(MyAdapter);
+        listView.setAdapter(myAdapter);
 
 
         lvLeftMenu.setOnItemClickListener(new itemClickEvent());
@@ -129,6 +124,8 @@ public class TabActivity1 extends ActionBarActivity  {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             //通过单击事件，获得单击选项的内容
             //String text = lvLeftMenu.getItemAtPosition(position).toString();
+            List<RestaurantTbl> listTemp = new ArrayList<RestaurantTbl>();
+
             String s = Integer.toString(position);
             SQLiteDatabase db_query = dbHelper.getWritableDatabase();
 
@@ -144,11 +141,10 @@ public class TabActivity1 extends ActionBarActivity  {
                 //System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + PICTURE);
 
                 RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE);
-                restaurantsList.add(restaurant);
+                listTemp.add(restaurant);
             }
-
-            listView = (ListView) findViewById(R.id.lv);
-            listView.setAdapter(MyAdapter);
+            myAdapter.refresh(listTemp);
+            listView.setAdapter(myAdapter);
 
 
             //通过吐丝对象显示出来。
@@ -160,8 +156,10 @@ public class TabActivity1 extends ActionBarActivity  {
     class MyAdapter extends BaseAdapter {
         AssetManager assetManager = null;
         private Context context;
+        List<RestaurantTbl> restaurantsList;
 
-        public MyAdapter(Context context) {
+        public MyAdapter(List<RestaurantTbl> list, Context context) {
+            this.restaurantsList = list;
             this.context = context;
         }
 
@@ -212,6 +210,13 @@ public class TabActivity1 extends ActionBarActivity  {
         public long getItemId(int position) {
             return 0;
         }
+
+        public void refresh(List<RestaurantTbl> list){
+            restaurantsList = list;
+            notifyDataSetChanged();
+        }
+
+
     }
 
     private void findViews() {

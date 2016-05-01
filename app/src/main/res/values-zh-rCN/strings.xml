@@ -16,6 +16,7 @@
     <string name="rb_tab5_name">用户</string>
 
     <string-array name="res_kind">
+        <item>全部</item>
         <item>火锅</item>
         <item>北方菜</item>
         <item>特色小吃</item>

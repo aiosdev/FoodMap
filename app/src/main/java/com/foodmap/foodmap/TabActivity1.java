@@ -77,6 +77,7 @@ public class TabActivity1 extends ActionBarActivity  {
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 //mAnimationDrawable.start();
+                //invalidateOptionsMenu();// 重新绘制actionBar上边的菜单项
             }
         };
         mDrawerToggle.syncState();
@@ -126,10 +127,18 @@ public class TabActivity1 extends ActionBarActivity  {
             //String text = lvLeftMenu.getItemAtPosition(position).toString();
             List<RestaurantTbl> listTemp = new ArrayList<RestaurantTbl>();
 
+
+
+
             String s = Integer.toString(position);
             SQLiteDatabase db_query = dbHelper.getWritableDatabase();
+            Cursor cursor;
+            if("0".equals(s)){
+                cursor = db_query.query("RestaurantTbl", null, null, null, null, null, null,null);
+            }else{
+                cursor = db_query.query("RestaurantTbl where kind="+position, null, null, null, null, null, null,null);
+            }
 
-            Cursor cursor = db_query.query("RestaurantTbl where kind="+position, null, null, null, null, null, null,null);
 
             while (cursor.moveToNext()) {
                 String NAME = cursor.getString(1);
@@ -147,9 +156,12 @@ public class TabActivity1 extends ActionBarActivity  {
             listView.setAdapter(myAdapter);
 
 
+
             //通过吐丝对象显示出来。
             //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
             Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+
+            mDrawerLayout.closeDrawer(lvLeftMenu);
         }
     }
 

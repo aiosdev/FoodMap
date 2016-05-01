@@ -15,14 +15,15 @@
     <string name="rb_tab5_name">usager Centre</string>
 
     <string-array name="res_kind">
-        <item>fondue chinoise</item>
-        <item>plats du Nord</item>
-        <item>snacks speciale</item>
-        <item>Sichuan cuisine</item>
-        <item>Cantonais cuisine</item>
-        <item>cuisine japonaise et coréenne</item>
-        <item>alimentaire wheaten cuit</item>
-        <item>buffet</item>
+        <item>Touts Les Aliments</item>
+        <item>Fondue Fhinoise</item>
+        <item>Plats Du Nord</item>
+        <item>Snacks Speciale</item>
+        <item>Sichuan Cuisine</item>
+        <item>Cantonais Cuisine</item>
+        <item>Cuisine Japonaise Et Coréenne</item>
+        <item>Alimentaire Wheaten Cuit</item>
+        <item>Buffet</item>
     </string-array>
 
 </resources>

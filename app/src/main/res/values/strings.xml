@@ -14,14 +14,15 @@
     <string name="rb_tab5_name">User Center</string>
 
     <string-array name="res_kind">
-        <item>hotpot</item>
+        <item>All</item>
+        <item>Hotpot</item>
         <item>Northern food</item>
-        <item>special snacks</item>
+        <item>Special snacks</item>
         <item>Sichuan food</item>
         <item>Cantonese food</item>
         <item>Japanese and Korean cuisine</item>
         <item>Cooked wheaten food</item>
-        <item>buffet</item>
+        <item>Buffet</item>
       </string-array>
 
 </resources>

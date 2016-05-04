@@ -24,7 +24,7 @@
         android:textSize="18sp"
         android:layout_below="@+id/tv_title"
         android:layout_toRightOf="@+id/iv"
-        android:lines="2"/>
+        android:lines="1"/>
 
     <TextView
         android:id="@+id/tv_number"

@@ -18,20 +18,20 @@
         android:lines="1"/>
 
     <TextView
-        android:id="@+id/tv_number"
+        android:id="@+id/tv_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:layout_below="@+id/tv_title"
         android:layout_toRightOf="@+id/iv"
-        android:lines="1"/>
+        android:lines="2"/>
 
     <TextView
-        android:id="@+id/tv_address"
+        android:id="@+id/tv_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:layout_below="@+id/tv_number"
+        android:layout_below="@+id/tv_address"
         android:layout_toRightOf="@+id/iv"
-        android:lines="2"/>
+        android:lines="1"/>
 </RelativeLayout>

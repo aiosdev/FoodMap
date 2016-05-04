@@ -97,14 +97,16 @@ public class TabActivity1 extends ActionBarActivity  {
 
         while (cursor.moveToNext()) {
             String NAME = cursor.getString(1);
-            String ADDRESS = cursor.getString(2);
-            String POSTAL = cursor.getString(3);
+            String ADDRESS = cursor.getString(4);
+            String POSTAL = cursor.getString(2);
             String PICTURE = cursor.getString(5);
-            String TELEPHONE = cursor.getString(4);
+            String TELEPHONE = cursor.getString(3);
+            String DESCRIPTION = cursor.getString(6);
+            String RESKIND = cursor.getString(7);
 
             System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + PICTURE);
 
-            RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE);
+            RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND);
             restaurantsListTemp.add(restaurant);
         }
 
@@ -146,10 +148,12 @@ public class TabActivity1 extends ActionBarActivity  {
                 String POSTAL = cursor.getString(3);
                 String PICTURE = cursor.getString(5);
                 String TELEPHONE = cursor.getString(4);
+                String DESCRIPTION = cursor.getString(6);
+                String RESKIND = cursor.getString(7);
 
                 //System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + PICTURE);
 
-                RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE);
+                RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND);
                 listTemp.add(restaurant);
             }
             myAdapter.refresh(listTemp);
@@ -183,10 +187,14 @@ public class TabActivity1 extends ActionBarActivity  {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             RestaurantTbl restaurant = restaurantsList.get(position);
-            System.out.println(restaurant.getADDRESS());
-            System.out.println(restaurant.getNAME());
-            System.out.println(restaurant.getPOSTAL());
+            System.out.println(restaurant.getName());
+            System.out.println(restaurant.getAddress());
+            System.out.println(restaurant.getPostal());
+            System.out.println(restaurant.getTelephone());
             System.out.println(restaurant.getImageUrl());
+            System.out.println(restaurant.getDescription());
+            System.out.println(restaurant.getResKind());
+            System.out.println(restaurant.getPostal());
 
             View view = null;
             view = View.inflate(TabActivity1.this, R.layout.item_listview, null);
@@ -205,11 +213,11 @@ public class TabActivity1 extends ActionBarActivity  {
             //iv.setImageURI(Uri.parse("pic/"+restaurant.getImageUrl().toString()));
             System.out.println("pic/" + restaurant.getImageUrl().toString());
             TextView tv_title = (TextView) view.findViewById(R.id.tv_title);
-            tv_title.setText(restaurant.getNAME());
+            tv_title.setText(restaurant.getName());
             TextView tv_number = (TextView) view.findViewById(R.id.tv_number);
-            tv_number.setText(restaurant.getTELEPHONE());
+            tv_number.setText(restaurant.getTelephone());
             TextView tv_address = (TextView) view.findViewById(R.id.tv_address);
-            tv_address.setText(restaurant.getADDRESS());
+            tv_address.setText(restaurant.getAddress());
             return view;
         }
 

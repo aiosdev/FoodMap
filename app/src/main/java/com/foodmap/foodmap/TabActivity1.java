@@ -110,18 +110,25 @@ public class TabActivity1 extends ActionBarActivity  {
             restaurantsListTemp.add(restaurant);
         }
 
-        listView = (ListView) findViewById(R.id.lv);
+
         myAdapter = new MyAdapter(restaurantsListTemp, this);
 
         listView.setAdapter(myAdapter);
 
 
-        lvLeftMenu.setOnItemClickListener(new itemClickEvent());
+        lvLeftMenu.setOnItemClickListener(new itemqClickEvent());
+
+        listView.setOnItemClickListener(new lvItemClick());
+
 
 
     }
 
-    private final class itemClickEvent implements AdapterView.OnItemClickListener {
+
+
+
+
+    private final class itemqClickEvent implements AdapterView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -223,7 +230,7 @@ public class TabActivity1 extends ActionBarActivity  {
 
         @Override
         public Object getItem(int position) {
-            return null;
+            return restaurantsList.get(position);
         }
 
         @Override
@@ -244,5 +251,45 @@ public class TabActivity1 extends ActionBarActivity  {
         toolbar = (Toolbar) findViewById(R.id.tl_custom);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.dl_left);
         lvLeftMenu = (ListView) findViewById(R.id.lv_left_menu);
+        listView = (ListView) findViewById(R.id.lv);
+    }
+
+    private class lvItemClick implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            TextView tv_number = (TextView) view.findViewById(R.id.tv_number);
+
+            SQLiteDatabase db_query = dbHelper.getWritableDatabase();
+            Cursor cursor;
+            String phoneNo = tv_number.getText().toString();
+            cursor = db_query.query("RestaurantTbl where tel="+phoneNo, null, null, null, null, null, null,null);
+
+            if (cursor.moveToNext()) {
+                String NAME = cursor.getString(1);
+                String ADDRESS = cursor.getString(4);
+                String POSTAL = cursor.getString(2);
+                String PICTURE = cursor.getString(5);
+                String TELEPHONE = cursor.getString(3);
+                String DESCRIPTION = cursor.getString(6);
+                String RESKIND = cursor.getString(7);
+
+
+            //System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + PICTURE);
+
+                RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND);
+                System.out.println("====" + restaurant.getName());
+                System.out.println("====" + restaurant.getAddress());
+                System.out.println("====" + restaurant.getPostal());
+                System.out.println("====" + restaurant.getTelephone());
+                System.out.println("====" + restaurant.getImageUrl());
+                System.out.println("====" + restaurant.getDescription());
+                System.out.println("====" + restaurant.getResKind());
+                System.out.println("====" + restaurant.getPostal());
+
+
+            //System.out.println("===============" + tv_title.getText().toString());
+            System.out.println("===============" + restaurant.getAddress() + "==" + restaurant.getName());
+            }
+        }
     }
 }

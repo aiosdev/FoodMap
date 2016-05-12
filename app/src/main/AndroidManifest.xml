@@ -15,16 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".WelcomeGuideActivity"></activity>
-        <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".TabActivity1"></activity>
-        <activity android:name=".TabActivity2"></activity>
-        <activity android:name=".TabActivity3"></activity>
-        <activity android:name=".TabActivity4"></activity>
-        <activity android:name=".TabActivity5"></activity>
-
+        <activity android:name=".WelcomeGuideActivity" />
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".TabActivity1" />
+        <activity android:name=".TabActivity2" />
+        <activity android:name=".TabActivity3" />
+        <activity android:name=".TabActivity4" />
+        <activity android:name=".TabActivity5" />
+        <activity android:name=".TabActivity1ResDetail"></activity>
     </application>
 
 </manifest>

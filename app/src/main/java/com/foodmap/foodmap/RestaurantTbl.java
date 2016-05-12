@@ -1,9 +1,11 @@
 package com.foodmap.foodmap;
 
+import java.io.Serializable;
+
 /**
  * Created by guoecho on 2016/4/26.
  */
-public class RestaurantTbl {
+public class RestaurantTbl implements Serializable {
 
     private String name;
     private String address;

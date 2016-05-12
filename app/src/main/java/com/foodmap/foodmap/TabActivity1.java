@@ -1,6 +1,7 @@
 package com.foodmap.foodmap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -261,10 +262,11 @@ public class TabActivity1 extends ActionBarActivity  {
 
             SQLiteDatabase db_query = dbHelper.getWritableDatabase();
             Cursor cursor;
-            String phoneNo = tv_number.getText().toString();
+            String phoneNo = tv_number.getText().toString().trim();
             cursor = db_query.query("RestaurantTbl where tel="+phoneNo, null, null, null, null, null, null,null);
 
-            if (cursor.moveToNext()) {
+            if (cursor.getCount() == 1) {
+                cursor.moveToNext();
                 String NAME = cursor.getString(1);
                 String ADDRESS = cursor.getString(4);
                 String POSTAL = cursor.getString(2);
@@ -288,7 +290,19 @@ public class TabActivity1 extends ActionBarActivity  {
 
 
             //System.out.println("===============" + tv_title.getText().toString());
-            System.out.println("===============" + restaurant.getAddress() + "==" + restaurant.getName());
+                System.out.println("===============" + restaurant.getAddress() + "==" + restaurant.getName());
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("res", restaurant);
+                Intent intent = new Intent();
+                intent.putExtras(bundle);
+
+                intent.setClass(TabActivity1.this,TabActivity1ResDetail.class);
+                startActivity(intent);
+                //TabActivity1.this.finish();
+
+            }else{
+                Toast.makeText(getApplicationContext(), "2222222222222", Toast.LENGTH_SHORT).show();
             }
         }
     }

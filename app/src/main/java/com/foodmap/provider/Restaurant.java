@@ -18,6 +18,8 @@ public class Restaurant implements BaseColumns {
     public static final String PICTURE = "pic";					//门脸图片
     public static final String DESCRIPTION= "desc";	        // 描述
     public static final String RESKIND= "kind";	        // 分类
+    public static final String LATITUDE = "latitude";    //横坐标
+    public static final String LONGITUDE = "longitude"; //纵坐标
 
 
 }

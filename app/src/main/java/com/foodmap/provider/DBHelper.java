@@ -33,6 +33,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Restaurant.PICTURE + " TEXT,"
                 + Restaurant.DESCRIPTION + " TEXT,"
                 + Restaurant.RESKIND + " TEXT"
+                + Restaurant.LATITUDE + " DOUBLE"
+                + Restaurant.LONGITUDE + " DOUBLE"
                 + ");");
 
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?)"

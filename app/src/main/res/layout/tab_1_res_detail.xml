@@ -9,24 +9,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.foodmap.foodmap.TabActivity1ResDetail">
 
-
     <ImageView
         android:id="@+id/detail_pic"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true" />
 
     <TextView
         android:id="@+id/detail_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/Indigo_nav_color"
         android:layout_below="@+id/detail_pic"
+        android:layout_centerInParent="true"
         android:lines="1"
-        android:text="@string/detail_info"/>
+        android:text="@string/detail_info"
+        android:textColor="@color/Indigo_nav_color"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"/>
 
     <LinearLayout
         android:id="@+id/detail_title_linearlayout"
@@ -39,15 +38,15 @@
             android:id="@+id/detail_info_title1"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:text="@string/detail_info_name"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/detail_info_name"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -62,18 +61,17 @@
             android:id="@+id/detail_info_address"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:text="@string/detail_info_address"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/detail_info_address"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/detail_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/detail_postal_linearlayout"
@@ -86,16 +84,16 @@
             android:id="@+id/detail_info_postal"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:text="@string/detail_info_postal"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/detail_info_postal"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/detail_postal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:lines="1"/>
+            android:lines="1"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -110,16 +108,16 @@
             android:id="@+id/detail_info_number"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:text="@string/detail_info_number"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/detail_info_number"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/detail_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:lines="1"/>
+            android:lines="1"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -134,17 +132,32 @@
             android:id="@+id/detail_info_desc"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:text="@string/detail_info_desc"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/detail_info_desc"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/detail_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/detail_button_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_desc_linearlayout"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Google Map"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

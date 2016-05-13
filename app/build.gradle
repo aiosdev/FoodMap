@@ -17,10 +17,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("D:\\suntao\\android-key-store\\keystore_mapdemo.jks")
+            storePassword "mengcheng123"
+            keyAlias "bbt"
+            keyPassword "mengcheng123"
+        }
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
 }

@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +30,16 @@ public class TabActivity1ResDetail extends AppCompatActivity {
         TextView detail_number = (TextView) findViewById(R.id.detail_number);
         TextView detail_postal = (TextView) findViewById(R.id.detail_postal);
         TextView detail_desc = (TextView) findViewById(R.id.detail_desc);
+
+        Button bt_map = (Button) findViewById(R.id.bt_map);
+        bt_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent();
+                intent2.setClass(TabActivity1ResDetail.this,BasicMapDemoActivity.class);
+                startActivity(intent2);
+            }
+        });
 
         AssetManager assetManager = this.getAssets();
         try {

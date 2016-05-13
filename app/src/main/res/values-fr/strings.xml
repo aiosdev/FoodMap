@@ -14,6 +14,13 @@
     <string name="rb_tab4_name">Configuration</string>
     <string name="rb_tab5_name">usager Centre</string>
 
+    <string name="detail_info">Infomation De Restaurant :</string>
+    <string name="detail_info_name">Nom De Restaurant :</string>
+    <string name="detail_info_address">Addresse :</string>
+    <string name="detail_info_postal">Code Postal :</string>
+    <string name="detail_info_number">Numéro De Telephone :</string>
+    <string name="detail_info_desc">Description :</string>
+
     <string-array name="res_kind">
         <item>Touts Les Aliments</item>
         <item>Fondue Fhinoise</item>

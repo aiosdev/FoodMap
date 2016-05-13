@@ -13,6 +13,13 @@
     <string name="rb_tab4_name">Setting</string>
     <string name="rb_tab5_name">User Center</string>
 
+    <string name="detail_info">Restaurant Infomation :</string>
+    <string name="detail_info_name">Restaurant Name :</string>
+    <string name="detail_info_address">Address :</string>
+    <string name="detail_info_postal">Postal Code:</string>
+    <string name="detail_info_number">Telephone Number :</string>
+    <string name="detail_info_desc">Description :</string>
+
     <string-array name="res_kind">
         <item>All</item>
         <item>Hotpot</item>

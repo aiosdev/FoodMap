@@ -15,6 +15,13 @@
     <string name="rb_tab4_name">配置</string>
     <string name="rb_tab5_name">用户</string>
 
+    <string name="detail_info">餐馆信息 :</string>
+    <string name="detail_info_name">名称 :</string>
+    <string name="detail_info_address">地址 :</string>
+    <string name="detail_info_postal">邮编 :</string>
+    <string name="detail_info_number">电话 :</string>
+    <string name="detail_info_desc">简介 :</string>
+
     <string-array name="res_kind">
         <item>全部</item>
         <item>火锅</item>

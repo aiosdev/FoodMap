@@ -244,7 +244,9 @@ public class TabActivity1 extends ActionBarActivity  {
             notifyDataSetChanged();
         }
 
-
+        public List<RestaurantTbl> getRestaurantsList() {
+            return restaurantsList;
+        }
     }
 
     private void findViews() {
@@ -258,6 +260,29 @@ public class TabActivity1 extends ActionBarActivity  {
     private class lvItemClick implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            RestaurantTbl restTemp = myAdapter.getRestaurantsList().get(position);
+
+            /*
+            System.out.println("====" + restTemp.getName());
+            System.out.println("====" + restTemp.getAddress());
+            System.out.println("====" + restTemp.getPostal());
+            System.out.println("====" + restTemp.getTelephone());
+            System.out.println("====" + restTemp.getImageUrl());
+            System.out.println("====" + restTemp.getDescription());
+            System.out.println("====" + restTemp.getResKind());
+            System.out.println("====" + restTemp.getPostal());
+            */
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("res", restTemp);
+            Intent intent = new Intent();
+            intent.putExtras(bundle);
+
+            intent.setClass(TabActivity1.this,TabActivity1ResDetail.class);
+            startActivity(intent);
+            //TabActivity1.this.finish();
+
+            /*
             TextView tv_number = (TextView) view.findViewById(R.id.tv_number);
 
             SQLiteDatabase db_query = dbHelper.getWritableDatabase();
@@ -304,6 +329,7 @@ public class TabActivity1 extends ActionBarActivity  {
             }else{
                 Toast.makeText(getApplicationContext(), "2222222222222", Toast.LENGTH_SHORT).show();
             }
+            */
         }
     }
 }

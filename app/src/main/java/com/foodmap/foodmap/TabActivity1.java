@@ -121,12 +121,7 @@ public class TabActivity1 extends ActionBarActivity  {
 
         listView.setOnItemClickListener(new lvItemClick());
 
-
-
     }
-
-
-
 
 
     private final class itemqClickEvent implements AdapterView.OnItemClickListener {

@@ -52,6 +52,7 @@ public class TabActivity3 extends AppCompatActivity implements
         View.OnClickListener {
 
     private GoogleMap mMap;
+    private Location location;
 
     //To store longitude and latitude from map
     private double longitude;
@@ -137,7 +138,6 @@ public class TabActivity3 extends AppCompatActivity implements
     //Getting current location
     private void getcurrentLocation() {
         mMap.clear();
-
 
         //Creating a location object
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -338,8 +338,8 @@ public class TabActivity3 extends AppCompatActivity implements
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng latlng = new LatLng(-34, 151);
+        // Add a marker in Montreal and move the camera
+        LatLng latlng = new LatLng(45.50, -73.56);
         mMap.addMarker(new MarkerOptions().position(latlng).draggable(true));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
         mMap.setOnMarkerDragListener(this);
@@ -358,7 +358,8 @@ public class TabActivity3 extends AppCompatActivity implements
             return;
         }
         mMap.setMyLocationEnabled(true);
-
+        //Animating the camera
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
     }
 
 	@Override

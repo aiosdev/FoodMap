@@ -303,7 +303,7 @@ public class TabActivity3 extends AppCompatActivity implements
      */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-
+        getcurrentLocation();
     }
 
     @Override

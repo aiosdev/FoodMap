@@ -315,23 +315,25 @@ public class TabActivity3 extends AppCompatActivity implements
             String LONGITUDE = cursor.getString(9);
 
 
-            RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE
-                                                , DESCRIPTION, RESKIND, LATITUDE,LONGITUDE);
+            RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE,LONGITUDE);
             restaurantTbl.add(restaurant);
+
+            System.out.println("数据库已加载");
 
             //把数据库中坐标取出
             for(int i = 0; i< restaurantTbl.size(); i++){
-                createMarker(restaurantTbl.get(i).getLatitude(), restaurantTbl.get(i).getLongitude());
+                createMarker(Double.parseDouble(restaurantTbl.get(i).getLatitude()), Double.parseDouble(restaurantTbl.get(i).getLongitude()));
+                System.out.println("横坐标"+ Double.parseDouble(restaurantTbl.get(i).getLatitude()));
             }
 
         }
     }
 
     //在地图上显示出markers
-    private Marker createMarker(String latitude, String longitude) {
+    private Marker createMarker(Double latitude, Double longitude) {
 
             return mMap.addMarker(new MarkerOptions()
-                   .position(new LatLng((Double.parseDouble(latitude)),Double.parseDouble(longitude)))
+                   .position(new LatLng(latitude,longitude))
                    .draggable(true));
 
     }
@@ -404,6 +406,8 @@ public class TabActivity3 extends AppCompatActivity implements
         mMap.setMyLocationEnabled(true);
         //Animating the camera
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+        addMarkersToMap();
     }
 
 	@Override

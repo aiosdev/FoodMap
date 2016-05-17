@@ -78,6 +78,26 @@ public class DBHelper extends SQLiteOpenHelper {
                 , new String[]{"水天一色" , "998 Boulevard St Laurent 6th Floor Montréal, QC", "H2Z 9Y9", "514-876-8778", "shuitianyise.jpg", "满市唐人街第一家高级粤菜餐馆!精美点心，鲍参翅肚，生猛海鲜", "1", String.valueOf(45.5077188), String.valueOf(-73.5615678)});
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
                 , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"Chatime 日出茶太(唐人街店）" , "52-C De La Gauchetiere Ouest Montréal, QC", "H2Z 1C1", "514-431-8388", "chatime.jpg", "日出茶太在全球享有知名度最高的珍珠奶茶店，我们从台湾出发，遍布全球世界各地，日出茶太是从2004年开始成立，到现在已经有10周年", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"麦香园康大分店" , "52-C De La Gauchetiere West Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
 
 
         System.out.println("create RestaurantTbl sucess !");

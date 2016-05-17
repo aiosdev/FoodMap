@@ -19,6 +19,9 @@ package com.foodmap.foodmap;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -26,7 +29,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -50,6 +55,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +65,7 @@ import java.util.List;
 public class BasicMapDemoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private RestaurantTbl restaurant;
+    private RestaurantTbl restaurantTemp;
 
     private double fromLatitude;
     private double fromLongitude;
@@ -74,8 +80,9 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_demo);
 
-        Intent intent = this.getIntent();
-        restaurant=(RestaurantTbl)intent.getSerializableExtra("resDetail");
+        Intent intent3 = this.getIntent();
+        restaurantTemp =(RestaurantTbl)intent3.getSerializableExtra("resDetail");
+        System.out.println("22222222222222" + restaurantTemp.getName());
 
         lv = (LinearLayout) findViewById(R.id.ll_popupLayout);
         animation1 = AnimationUtils.loadAnimation(this,
@@ -85,8 +92,8 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
 
         fromLatitude = 45.4715234;
         fromLongitude = -73.570739;
-        toLatitude = 45.4797206;
-        toLongitude = -73.5777023;
+        toLatitude = Double.parseDouble(restaurantTemp.getLatitude());
+        toLongitude = Double.parseDouble(restaurantTemp.getLongitude());
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -100,15 +107,15 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
      */
     @Override
     public void onMapReady(GoogleMap map) {
-        map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        //map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
         mMap = map;
         updateMyLocation();
 
         final LatLng sydney = new LatLng(fromLatitude, fromLongitude);
         LatLng target = new LatLng(toLatitude, toLongitude);
-        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        map.addMarker(new MarkerOptions().position(target).title("Marker in target"));
+        map.addMarker(new MarkerOptions().position(sydney).title("Current Location"));
+        map.addMarker(new MarkerOptions().position(target).title(restaurantTemp.getName()));
         //map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -116,6 +123,23 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
             public boolean onMarkerClick(Marker marker) {
                 lv.setVisibility(View.VISIBLE);
                 lv.setAnimation(animation1);
+
+                TextView updown_title = (TextView) findViewById(R.id.updown_title);
+                TextView updown_address = (TextView) findViewById(R.id.updown_address);
+                TextView updown_number = (TextView) findViewById(R.id.updown_number);
+                ImageView updown_iv = (ImageView) findViewById(R.id.updown_iv);
+
+                updown_title.setText(restaurantTemp.getName());
+                updown_address.setText(restaurantTemp.getAddress());
+                updown_number.setText(restaurantTemp.getTelephone());
+                AssetManager assetManager = getApplicationContext().getAssets();
+                try {
+                    InputStream in = assetManager.open("pic/" + restaurantTemp.getImageUrl().toString());
+                    Bitmap bmp = BitmapFactory.decodeStream(in);
+                    updown_iv.setImageBitmap(bmp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 return false;
             }

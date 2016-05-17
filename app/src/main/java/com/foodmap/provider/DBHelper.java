@@ -48,7 +48,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 , new String[]{"川味香" , "2350 rue Guy Montréal, QC", "H3H 2M2", "514-933-5041", "chuanweixiang.jpg", "水煮鱼,孜然鸡,香辣虾,脆皮牛肉,脆皮茄子", "3", String.valueOf(45.4963595), String.valueOf(-73.5836337)});
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
                 , new String[]{"高老庄 Mr.Gao Restaurant" , "1550 Maisonneure O, GM001， Montreal QC", "H3G", "514-989-8887", "gao.jpg", "东北菜，川菜", "2", String.valueOf(45.495887), String.valueOf(-73.5814591)});
-       db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+        db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
                 , new String[]{"大唐火锅" , "2070 de maisonneuve west, montreal, QC", "H3H 1K8", "514-935-977", "datang.jpg", "正宗重庆麻辣火锅，自助任吃。麻辣香锅，重庆小面，精品川菜", "1", String.valueOf(45.4924084), String.valueOf(-73.5853052)});
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
                 , new String[]{"忘利园烤鸭" , "1620B Av Lincoln ,montreal, QC", "H3H 1G9", "514-447-2165", "wangliyuan.jpg", "烤鸭", "4", String.valueOf(45.4957443), String.valueOf(-73.5826604)});
@@ -79,25 +79,45 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
                 , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"Chatime 日出茶太(唐人街店）" , "52-C De La Gauchetiere Ouest Montréal, QC", "H2Z 1C1", "514-431-8388", "chatime.jpg", "日出茶太在全球享有知名度最高的珍珠奶茶店，我们从台湾出发，遍布全球世界各地，日出茶太是从2004年开始成立，到现在已经有10周年", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"Chatime 日出茶太(唐人街店）" , "52-C De La Gauchetiere Ouest Montréal, QC", "H2Z 1C1", "514-431-8388", "chatime.jpg", "日出茶太在全球享有知名度最高的珍珠奶茶店，我们从台湾出发，遍布全球世界各地，日出茶太是从2004年开始成立，到现在已经有10周年", "6", String.valueOf(45.507613), String.valueOf(-73.562488)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"黄鹤楼" , "1858 St.Catherine West, Montréal, QC", "H3H 1M1", "514-564-8999", "huanghelou.jpg", "川菜湘菜-铁板羊肉，香辣鸡丁，玉子豆腐 位于市中心的一家川菜馆，味道正宗，环境干净，价钱也不贵", "6", String.valueOf(45.492959), String.valueOf(-73.5823071)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"麦香园康大分店" , "52-C De La Gauchetiere West Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"天津包子铺" , "30 de Gauchetiere Ouest 2nd Floor Montréal, QC", "H2Z 1B9", "514-868-0657", "tianjinbaozipu.jpg", "开在蒙特利尔唐人街的一家以北方包子为主打的餐馆", "6", String.valueOf(45.5077196), String.valueOf(-73.5624155)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"天后烘焙" , "12210 Laurentien Blvd. Montréal, QC", "H4K 1M9", "514-745-6888", "tianhouhongpei.jpg", "各式面包，各式（卡通）生日蛋糕，蛋糕卷，酥饼，各式珍珠奶茶等", "6", String.valueOf(45.5277456), String.valueOf(-73.7220062)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"水天一色烧腊餐厅" , "12230 Boul Laurentien, St Laurent, QC", "H4K 1M9", "514-332-3888", "shuitianyiseshaola.jpg", "水天一色烧腊餐厅", "6", String.valueOf(45.5280479), String.valueOf(-73.7227078)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"kosa蒙城首家韩式居酒屋" , "6710 rue saint Jacques Montréal, QC", "H4B, 1V8", "514-508-5672", "kosa.jpg", "特色的铁板烧和各式的烧烤、韩式特色小吃", "6", String.valueOf(45.4585087), String.valueOf(-73.6283017)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"满堂红（川湘菜）" , "8200 TASHEREAU #1270, BROSSARD, QC", "J4X 2S6", " 450-904-0660", "mantanghong.jpg", "毛式红烧肉、水煮肉片、干锅茶树菇等等川湘菜都是他家的拿手好菜", "6", String.valueOf(45.4490796), String.valueOf(-73.4726958)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"香妈妈 （东北菜）" , "3795 Rue Welington Montréal, QC", "H4G 1V1", "514-508-6418", "xiangmama.jpg", "味道非常正宗的东北菜，孜然牛肉，尖椒肥肠，地三鲜，酸菜白肉，黑白菜", "6", String.valueOf(45.46591), String.valueOf(-73.5690354)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"美食坊（外卖）" , "1809 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M2", "514-931-8889", "meishifang.jpg", "是一家传统的中式炒菜馆", "6", String.valueOf(45.4937474), String.valueOf(-73.5818186)});
 db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
-                , new String[]{"麦香园康大分店" , "1929 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1M3", "514-931-8880", "maixiangyuan.jpg", "各类饺子:煎饺、水饺、素馅、肉馅", "6", String.valueOf(45.4925231), String.valueOf(-73.5831124)});
+                , new String[]{"Sumi Dojo居酒屋" , "3479 Boul. St-Laurent Montréal, QC", "H2X 2T6", "514-507-7864", "sumidojo.jpg", "蒙城市中心的日式居酒屋", "6", String.valueOf(45.5131766), String.valueOf(-73.572828)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"福香缘（Downtown）" , "1629 Rue Ste-Catherine Ouest Montréal, QC", "H3H 1L8", "514-815-8998", "fuxiangyuan.jpg", "各式饺子， 煎饼果子，炸酱面，海鲜打卤面，各式小凉菜等，珍珠奶茶", "6", String.valueOf(45.494762), String.valueOf(-73.5807412)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"嘉乐轩" , "1240 rue Stanley Montréal, QC", "H3B 2S7", "514-871-8099", "jialexuan.jpg", "中式自助 在西人中比较出名，川菜,泰国,加拿大菜", "6", String.valueOf(45.4988107), String.valueOf(-73.574846)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"Tokyo东京将太寿司" , "1805 Rue Sainte-Catherine Ouest Montréal, QC", "H3H 2H9", "514-670-0068", "tokyodongjingjiangtaishousi.jpg", "Tokyo Sushi 东京将太寿司是蒙特利尔寿司店的后起之秀", "6", String.valueOf(45.4938241), String.valueOf(-73.5818324)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"神户寿司(Place Longueuil店)" , "825 rue St-Laurent Ouest Longueuil, QC", "J4K 2V1", "450-646-1188", "shenhushousi.jpg", "中餐+泰餐+日餐的综合类餐馆", "6", String.valueOf(45.5288018), String.valueOf(-73.5176516)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"鹏牛肉粉(Chinatown)(外卖)" , "1001 Boulevard Saint-Laurent Montréal, QC", "H2Z 1J4", "514-954-2032", "pengniuroufen.jpg", "越南河粉 蒙城比较受好评的几家越南河粉店之一，分量超大，价格便宜", "6", String.valueOf(45.5080241), String.valueOf(-73.5614169)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"强记菜馆" , "70 Rue De La Gauchetiere O Montréal, QC", "H2Z 1C1", "514-396-4643", "qiangjicaiguan.jpg", "蒙特利尔的老牌粤菜馆，是金牌之一。里面诸如金菇虎皮卷 ，各式煲，姜葱牛肉，清蒸鱼等都是招牌菜", "6", String.valueOf(45.5072427), String.valueOf(-73.5625407)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"Chez Mein 炒面" , "3754 Boul Saint-Laurent Montréal, QC", "H2W 1X6", "514-842-8880", "chezmien.jpg", "曾连续4次进入蒙特利尔5佳饭店。此店的特色是各类炒面，尤其2刀一碗的麻酱面，分量很足", "6", String.valueOf(45.5151246), String.valueOf(-73.5774534)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"喜胜人家（道口烧鸡）" , "4847 rue de Verdun Montréal, QC", "H4G 1N2", "514-691-3519", "xishengrenjia.jpg", "蒙特利尔比较少见的河南风味的餐馆", "6", String.valueOf(45.4570183), String.valueOf(-73.5742982)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"GIA BA RESTAURANT麻辣小龙虾" , "5766 MONKLAND AVENUE Montréal, QC", "H4A 1E9", "514-564-7698", "GIA.jpg", "麻辣小龙小是从温哥华渔场空运来的 鲜活干净 蒙城独一份", "6", String.valueOf(45.4736882), String.valueOf(-73.626739)});
+db.execSQL("insert into " + TABLES_TABLE_NAME + " values(null , ? , ? , ? , ? , ? , ? , ?, ?, ?)"
+                , new String[]{"福满楼(Monk) (外卖)" , "16222 Boul. Monk Montréal, QC", "H4E 3H7", "514-954-2032", "fumanlou.jpg", "虾迎面，虾饺，烤乳猪，黏米都受到网友很高评价。尤其是猪肉，香肠，虾皮等做成的黏米饭，非常受欢", "6", String.valueOf(45.4565415), String.valueOf(-73.5972931)});
 
 
         System.out.println("create RestaurantTbl sucess !");

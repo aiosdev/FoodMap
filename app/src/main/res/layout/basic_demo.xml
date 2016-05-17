@@ -17,4 +17,15 @@
     android:id="@+id/map"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    class="com.google.android.gms.maps.SupportMapFragment" />
+    class="com.google.android.gms.maps.SupportMapFragment" >
+
+    <LinearLayout
+        android:id="@+id/ll_popupLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
+
+        <include layout="@layout/updown_detail_from_map" />
+    </LinearLayout>
+</fragment>

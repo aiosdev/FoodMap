@@ -17,6 +17,7 @@
 package com.foodmap.foodmap;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ import java.util.List;
 public class BasicMapDemoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private RestaurantTbl restaurant;
 
     private double fromLatitude;
     private double fromLongitude;
@@ -71,6 +73,9 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_demo);
+
+        Intent intent = this.getIntent();
+        restaurant=(RestaurantTbl)intent.getSerializableExtra("resDetail");
 
         lv = (LinearLayout) findViewById(R.id.ll_popupLayout);
         animation1 = AnimationUtils.loadAnimation(this,

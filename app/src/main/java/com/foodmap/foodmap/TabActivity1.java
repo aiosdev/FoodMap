@@ -94,7 +94,7 @@ public class TabActivity1 extends ActionBarActivity  {
         dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null,null ,null ,null);
+        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             String NAME = cursor.getString(1);

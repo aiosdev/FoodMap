@@ -300,7 +300,7 @@ public class TabActivity3 extends AppCompatActivity implements
         ArrayList<RestaurantTbl> restaurantTbl = new ArrayList<RestaurantTbl>();
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null, null, null, null);
+        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             String NAME = cursor.getString(1);

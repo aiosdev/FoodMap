@@ -16,24 +16,14 @@
         <ImageView
             android:id="@+id/updown_iv"
             android:layout_width="70dp"
-            android:layout_height="70dp"/>
-
-        <TextView
-            android:id="@+id/updown_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_toRightOf="@+id/updown_iv"
-            android:lines="1"/>
+            android:layout_height="100dp"/>
 
         <TextView
             android:id="@+id/updown_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:layout_below="@+id/updown_title"
-            android:layout_toRightOf="@+id/updown_iv"
-            android:lines="1"/>
+            android:layout_toRightOf="@+id/updown_iv"/>
 
         <TextView
             android:id="@+id/updown_number"
@@ -43,6 +33,14 @@
             android:layout_below="@+id/updown_address"
             android:layout_toRightOf="@+id/updown_iv"
             android:lines="1"/>
+
+        <TextView
+            android:id="@+id/updown_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_below="@+id/updown_number"
+            android:layout_toRightOf="@+id/updown_iv"/>
 
     </RelativeLayout>
 

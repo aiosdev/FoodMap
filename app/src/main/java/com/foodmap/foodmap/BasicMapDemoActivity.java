@@ -124,12 +124,12 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
                 lv.setVisibility(View.VISIBLE);
                 lv.setAnimation(animation1);
 
-                TextView updown_title = (TextView) findViewById(R.id.updown_title);
+                TextView updown_des = (TextView) findViewById(R.id.updown_des);
                 TextView updown_address = (TextView) findViewById(R.id.updown_address);
                 TextView updown_number = (TextView) findViewById(R.id.updown_number);
                 ImageView updown_iv = (ImageView) findViewById(R.id.updown_iv);
 
-                updown_title.setText(restaurantTemp.getName());
+                updown_des .setText(restaurantTemp.getDescription());
                 updown_address.setText(restaurantTemp.getAddress());
                 updown_number.setText(restaurantTemp.getTelephone());
                 AssetManager assetManager = getApplicationContext().getAssets();

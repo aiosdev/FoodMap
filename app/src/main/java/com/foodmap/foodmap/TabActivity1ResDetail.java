@@ -36,6 +36,11 @@ public class TabActivity1ResDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("resDetail", restaurant);
+                intent2.putExtras(bundle);
+
                 intent2.setClass(TabActivity1ResDetail.this,BasicMapDemoActivity.class);
                 startActivity(intent2);
             }

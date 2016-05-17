@@ -94,20 +94,20 @@ public class TabActivity1 extends ActionBarActivity  {
         dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null,null ,null ,null);
+        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             String NAME = cursor.getString(1);
-            String ADDRESS = cursor.getString(4);
-            String POSTAL = cursor.getString(2);
+            String ADDRESS = cursor.getString(2);
+            String POSTAL = cursor.getString(3);
             String PICTURE = cursor.getString(5);
-            String TELEPHONE = cursor.getString(3);
+            String TELEPHONE = cursor.getString(4);
             String DESCRIPTION = cursor.getString(6);
             String RESKIND = cursor.getString(7);
             String LATITUDE = cursor.getString(8);
             String LONGITUDE = cursor.getString(9);
 
-            System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + PICTURE);
+            System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + POSTAL + ", " + PICTURE + ", " + TELEPHONE + ", " + DESCRIPTION + ", " + RESKIND + ", " + LATITUDE + ", " + LONGITUDE);
 
             RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE, LONGITUDE);
             restaurantsListTemp.add(restaurant);
@@ -137,15 +137,21 @@ public class TabActivity1 extends ActionBarActivity  {
 
             String s = Integer.toString(position);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null, null);
+            //Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null);
+            Cursor cursor;
+            if("0".equals(s)){
+                cursor = db.query("RestaurantTbl", null, null, null, null, null, null);
+            }else{
+                cursor = db.query("RestaurantTbl where kind="+position, null, null, null, null, null, null);
+            }
 
 
             while (cursor.moveToNext()) {
                 String NAME = cursor.getString(1);
-                String ADDRESS = cursor.getString(4);
-                String POSTAL = cursor.getString(2);
+                String ADDRESS = cursor.getString(2);
+                String POSTAL = cursor.getString(3);
                 String PICTURE = cursor.getString(5);
-                String TELEPHONE = cursor.getString(3);
+                String TELEPHONE = cursor.getString(4);
                 String DESCRIPTION = cursor.getString(6);
                 String RESKIND = cursor.getString(7);
                 String LATITUDE = cursor.getString(8);

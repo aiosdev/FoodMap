@@ -302,6 +302,7 @@ public class TabActivity3 extends AppCompatActivity implements
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null, null, null, null);
 
+
         while (cursor.moveToNext()) {
             String NAME = cursor.getString(1);
             String ADDRESS = cursor.getString(4);
@@ -318,6 +319,7 @@ public class TabActivity3 extends AppCompatActivity implements
                                                 , DESCRIPTION, RESKIND, LATITUDE,LONGITUDE);
             restaurantTbl.add(restaurant);
 
+            //把数据库中坐标取出
             for(int i = 0; i< restaurantTbl.size(); i++){
                 createMarker(restaurantTbl.get(i).getLatitude(), restaurantTbl.get(i).getLongitude());
             }
@@ -325,11 +327,12 @@ public class TabActivity3 extends AppCompatActivity implements
         }
     }
 
+    //在地图上显示出markers
     private Marker createMarker(String latitude, String longitude) {
 
-                return mMap.addMarker(new MarkerOptions()
-                       .position(new LatLng((Double.parseDouble(latitude)),Double.parseDouble(longitude)))
-                       .draggable(true));
+            return mMap.addMarker(new MarkerOptions()
+                   .position(new LatLng((Double.parseDouble(latitude)),Double.parseDouble(longitude)))
+                   .draggable(true));
 
     }
 

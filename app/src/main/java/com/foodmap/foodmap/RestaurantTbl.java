@@ -14,6 +14,8 @@ public class RestaurantTbl implements Serializable {
     private String imageUrl;
     private String description;
     private String resKind;
+    private String latitude;
+    private String longitude;
 
 
     public String getName() {
@@ -87,7 +89,7 @@ public class RestaurantTbl implements Serializable {
         return "RestaurantTbl{}";
     }
 
-    public RestaurantTbl(String NAME, String telephone, String address, String imageUrl, String postal, String description, String resKind) {
+    public RestaurantTbl(String NAME, String telephone, String address, String imageUrl, String postal, String description, String resKind, String latitude, String longitude) {
         this.name = NAME;
         this.telephone = telephone;
         this.address = address;
@@ -95,6 +97,23 @@ public class RestaurantTbl implements Serializable {
         this.postal = postal;
         this.description = description;
         this.resKind = resKind;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 }

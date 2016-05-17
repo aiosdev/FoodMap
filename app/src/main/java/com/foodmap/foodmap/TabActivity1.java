@@ -94,7 +94,7 @@ public class TabActivity1 extends ActionBarActivity  {
         dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null, null);
+        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null,null ,null ,null);
 
         while (cursor.moveToNext()) {
             String NAME = cursor.getString(1);
@@ -104,10 +104,12 @@ public class TabActivity1 extends ActionBarActivity  {
             String TELEPHONE = cursor.getString(3);
             String DESCRIPTION = cursor.getString(6);
             String RESKIND = cursor.getString(7);
+            String LATITUDE = cursor.getString(8);
+            String LONGITUDE = cursor.getString(9);
 
             System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + PICTURE);
 
-            RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND);
+            RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE, LONGITUDE);
             restaurantsListTemp.add(restaurant);
         }
 
@@ -133,16 +135,9 @@ public class TabActivity1 extends ActionBarActivity  {
             List<RestaurantTbl> listTemp = new ArrayList<RestaurantTbl>();
 
 
-
-
             String s = Integer.toString(position);
-            SQLiteDatabase db_query = dbHelper.getWritableDatabase();
-            Cursor cursor;
-            if("0".equals(s)){
-                cursor = db_query.query("RestaurantTbl", null, null, null, null, null, null,null);
-            }else{
-                cursor = db_query.query("RestaurantTbl where kind="+position, null, null, null, null, null, null,null);
-            }
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null, null);
 
 
             while (cursor.moveToNext()) {
@@ -153,10 +148,12 @@ public class TabActivity1 extends ActionBarActivity  {
                 String TELEPHONE = cursor.getString(3);
                 String DESCRIPTION = cursor.getString(6);
                 String RESKIND = cursor.getString(7);
+                String LATITUDE = cursor.getString(8);
+                String LONGITUDE = cursor.getString(9);
 
                 //System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + PICTURE);
 
-                RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND);
+                RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE,LONGITUDE);
                 listTemp.add(restaurant);
             }
             myAdapter.refresh(listTemp);

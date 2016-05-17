@@ -3,6 +3,8 @@ package com.foodmap.foodmap;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
@@ -10,7 +12,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.foodmap.provider.DBHelper;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
@@ -69,6 +71,8 @@ public class TabActivity3 extends AppCompatActivity implements
     //Google ApiClient
     private GoogleApiClient googleApiClient;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +97,7 @@ public class TabActivity3 extends AppCompatActivity implements
 
     }
 
-    private FragmentManager getChildFragmentManager() {
-        return null;
-    }
+
 
     @Override
     protected void onStart() {
@@ -290,6 +292,45 @@ public class TabActivity3 extends AppCompatActivity implements
 
         }
         return poly;
+    }
+
+    //Convert address to lng lat and add markers to map
+    public void addMarkersToMap(){
+        mMap.clear();
+        ArrayList<RestaurantTbl> restaurantTbl = new ArrayList<RestaurantTbl>();
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            String NAME = cursor.getString(1);
+            String ADDRESS = cursor.getString(4);
+            String POSTAL = cursor.getString(2);
+            String PICTURE = cursor.getString(5);
+            String TELEPHONE = cursor.getString(3);
+            String DESCRIPTION = cursor.getString(6);
+            String RESKIND = cursor.getString(7);
+            String LATITUDE = cursor.getString(8);
+            String LONGITUDE = cursor.getString(9);
+
+
+            RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE
+                                                , DESCRIPTION, RESKIND, LATITUDE,LONGITUDE);
+            restaurantTbl.add(restaurant);
+
+            for(int i = 0; i< restaurantTbl.size(); i++){
+                createMarker(restaurantTbl.get(i).getLatitude(), restaurantTbl.get(i).getLongitude());
+            }
+
+        }
+    }
+
+    private Marker createMarker(String latitude, String longitude) {
+
+                return mMap.addMarker(new MarkerOptions()
+                       .position(new LatLng((Double.parseDouble(latitude)),Double.parseDouble(longitude)))
+                       .draggable(true));
+
     }
 
     /**

@@ -98,10 +98,10 @@ public class TabActivity1 extends ActionBarActivity  {
 
         while (cursor.moveToNext()) {
             String NAME = cursor.getString(1);
-            String ADDRESS = cursor.getString(2);
-            String POSTAL = cursor.getString(3);
+            String ADDRESS = cursor.getString(4);
+            String POSTAL = cursor.getString(2);
             String PICTURE = cursor.getString(5);
-            String TELEPHONE = cursor.getString(4);
+            String TELEPHONE = cursor.getString(3);
             String DESCRIPTION = cursor.getString(6);
             String RESKIND = cursor.getString(7);
             String LATITUDE = cursor.getString(8);
@@ -148,10 +148,10 @@ public class TabActivity1 extends ActionBarActivity  {
 
             while (cursor.moveToNext()) {
                 String NAME = cursor.getString(1);
-                String ADDRESS = cursor.getString(2);
-                String POSTAL = cursor.getString(3);
+                String ADDRESS = cursor.getString(4);
+                String POSTAL = cursor.getString(2);
                 String PICTURE = cursor.getString(5);
-                String TELEPHONE = cursor.getString(4);
+                String TELEPHONE = cursor.getString(3);
                 String DESCRIPTION = cursor.getString(6);
                 String RESKIND = cursor.getString(7);
                 String LATITUDE = cursor.getString(8);

@@ -31,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -71,7 +72,7 @@ public class TabActivity3 extends AppCompatActivity implements
     //Google ApiClient
     private GoogleApiClient googleApiClient;
 
-
+    private ArrayList<RestaurantTbl> restaurantList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,10 +102,11 @@ public class TabActivity3 extends AppCompatActivity implements
 
     @Override
     protected void onStart() {
-        googleApiClient.connect();
+        //googleApiClient.connect();
         super.onStart();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
+        /*
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, //TODO: choose an action type.
                 "Maps Page", // TODO: Define a title for the content shown.
@@ -116,14 +118,16 @@ public class TabActivity3 extends AppCompatActivity implements
                 Uri.parse("android-app://com.foodmap.foodmap/http/host/path")
         );
         AppIndex.AppIndexApi.start(googleApiClient, viewAction);
+        */
     }
 
     @Override
     protected void onStop() {
-        googleApiClient.disconnect();
+        //googleApiClient.disconnect();
         super.onStop();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
+        /*
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, //TODO: choose an action type.
                 "Maps Page", // TODO: Define a title for the content shown.
@@ -135,11 +139,12 @@ public class TabActivity3 extends AppCompatActivity implements
                 Uri.parse("android-app://com.foodmap.foodmap/http/host/path")
         );
         AppIndex.AppIndexApi.end(googleApiClient, viewAction);
+        */
     }
 
     //Getting current location
     private void getcurrentLocation() {
-        mMap.clear();
+        //mMap.clear();
 
         //Creating a location object
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -296,8 +301,8 @@ public class TabActivity3 extends AppCompatActivity implements
 
     //Convert address to lng lat and add markers to map
     public void addMarkersToMap(){
-        mMap.clear();
-        ArrayList<RestaurantTbl> restaurantTbl = new ArrayList<RestaurantTbl>();
+        //mMap.clear();
+        restaurantList = new ArrayList<RestaurantTbl>();
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null);
@@ -316,14 +321,17 @@ public class TabActivity3 extends AppCompatActivity implements
 
 
             RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE,LONGITUDE);
-            restaurantTbl.add(restaurant);
+            restaurantList.add(restaurant);
 
             System.out.println("数据库已加载");
 
             //把数据库中坐标取出
-            for(int i = 0; i< restaurantTbl.size(); i++){
-                createMarker(Double.parseDouble(restaurantTbl.get(i).getLatitude()), Double.parseDouble(restaurantTbl.get(i).getLongitude()));
-                System.out.println("横坐标"+ Double.parseDouble(restaurantTbl.get(i).getLatitude()));
+            for(int i = 0; i< restaurantList.size(); i++){
+                //createMarker(Double.parseDouble(restaurantList.get(i).getLatitude()), Double.parseDouble(restaurantList.get(i).getLongitude()));
+                mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(Double.parseDouble(restaurantList.get(i).getLatitude()),Double.parseDouble(restaurantList.get(i).getLongitude())))
+                        .draggable(true).title(restaurantList.get(i).getName()));
+                System.out.println("横坐标"+ Double.parseDouble(restaurantList.get(i).getLatitude()));
             }
 
         }
@@ -385,11 +393,15 @@ public class TabActivity3 extends AppCompatActivity implements
         mMap = googleMap;
 
         // Add a marker in Montreal and move the camera
-        LatLng latlng = new LatLng(45.50, -73.56);
+        LatLng latlng = new LatLng(45.4715234, -73.570739);
         mMap.addMarker(new MarkerOptions().position(latlng).draggable(true));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
-        mMap.setOnMarkerDragListener(this);
-        mMap.setOnMapLongClickListener(this);
+
+        addMarkersToMap();
+
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+        //mMap.setOnMarkerDragListener(this);
+        //mMap.setOnMapLongClickListener(this);
 
         //enable currentLocation of default googleMap
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -405,9 +417,11 @@ public class TabActivity3 extends AppCompatActivity implements
         }
         mMap.setMyLocationEnabled(true);
         //Animating the camera
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
-        addMarkersToMap();
+        //addMarkersToMap();
+        CameraPosition camPosition = new CameraPosition.Builder().target(latlng).zoom(14).build();
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPosition));
     }
 
 	@Override
@@ -423,11 +437,11 @@ public class TabActivity3 extends AppCompatActivity implements
 	@Override
 	public void onMarkerDragEnd(Marker marker) {
         //Getting the coordinates
-        latitude = marker.getPosition().latitude;
-        longitude = marker.getPosition().longitude;
+        //latitude = marker.getPosition().latitude;
+       // longitude = marker.getPosition().longitude;
 
         //Moving the map
-        moveMap();
+        //moveMap();
 
 	}
 }

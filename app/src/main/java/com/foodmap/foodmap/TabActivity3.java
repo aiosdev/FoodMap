@@ -6,8 +6,9 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.location.Criteria;
 import android.location.Location;
-import android.net.Uri;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.foodmap.provider.DBHelper;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -179,8 +179,8 @@ public class TabActivity3 extends AppCompatActivity implements
         //Adding marker to map
         mMap.addMarker(new MarkerOptions()
                 .position(latlng) //setting position
-                .draggable(true) //Making the marker draggable
-                .title("Current Location")); //Adding a title
+                .draggable(true)); //Making the marker draggable
+//                .title("Current Location")); //Adding a title
 
         //Moving the camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
@@ -391,9 +391,14 @@ public class TabActivity3 extends AppCompatActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //get current location
+        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String provider = service.getBestProvider(criteria, false);
+        Location location = service.getLastKnownLocation(provider);
 
         // Add a marker in Montreal and move the camera
-        LatLng latlng = new LatLng(45.4715234, -73.570739);
+        LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(latlng).draggable(true));
 
         addMarkersToMap();

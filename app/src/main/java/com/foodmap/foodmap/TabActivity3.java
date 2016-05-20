@@ -22,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.foodmap.foodmap.model.MyItem;
+import com.foodmap.foodmap.model.MyItemReader;
 import com.foodmap.provider.DBHelper;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
@@ -38,11 +40,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
+import com.google.maps.android.clustering.ClusterManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +77,8 @@ public class TabActivity3 extends AppCompatActivity implements
     private GoogleApiClient googleApiClient;
 
     private ArrayList<RestaurantTbl> restaurantList;
+
+    private ClusterManager<MyItem> mClusterManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,7 +192,7 @@ public class TabActivity3 extends AppCompatActivity implements
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
 
         //Animating the camera
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
     }
 
     public String makeURL(double sourcelat, double sourcelog, double destlat, double destlog) {
@@ -326,6 +332,7 @@ public class TabActivity3 extends AppCompatActivity implements
             System.out.println("数据库已加载");
 
             //把数据库中坐标取出
+            /*
             for(int i = 0; i< restaurantList.size(); i++){
                 //createMarker(Double.parseDouble(restaurantList.get(i).getLatitude()), Double.parseDouble(restaurantList.get(i).getLongitude()));
                 mMap.addMarker(new MarkerOptions()
@@ -333,7 +340,7 @@ public class TabActivity3 extends AppCompatActivity implements
                         .draggable(true).title(restaurantList.get(i).getName()));
                 System.out.println("横坐标"+ Double.parseDouble(restaurantList.get(i).getLatitude()));
             }
-
+            */
         }
     }
 
@@ -403,6 +410,11 @@ public class TabActivity3 extends AppCompatActivity implements
 
         addMarkersToMap();
 
+        mClusterManager = new ClusterManager<MyItem>(this, mMap);
+
+        mMap.setOnCameraChangeListener(mClusterManager);
+        readItems();
+
 
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
         //mMap.setOnMarkerDragListener(this);
@@ -449,4 +461,17 @@ public class TabActivity3 extends AppCompatActivity implements
         //moveMap();
 
 	}
+
+    private void readItems()  {
+
+        //for (int i = 0; i < 10; i++) {
+        //    double offset = i / 60d;
+            for (RestaurantTbl resTemp : restaurantList) {
+                double lat = Double.parseDouble(resTemp.getLatitude());// + offset;
+                double lng = Double.parseDouble(resTemp.getLongitude());// + offset;
+                MyItem offsetItem = new MyItem(lat, lng);
+                mClusterManager.addItem(offsetItem);
+            }
+       // }
+    }
 }

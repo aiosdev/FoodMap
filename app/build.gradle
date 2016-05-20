@@ -20,6 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    signingConfigs {
+        debug {
+            storeFile file("D:\\suntao\\android-key-store\\keystore_mapdemo.jks")
+            storePassword "mengcheng123"
+            keyAlias "bbt"
+            keyPassword "mengcheng123"
+        }
+    }
 
 }
 

@@ -7,7 +7,11 @@
     <string name="button_get_barcode">搜索</string>
     <string name="button_return">返回</string>
 
+    <string name="resKind">更多选择</string>
+
     <string name="enter">开始体验</string>
+
+    <string name="current_loc">当前位置</string>
 
     <string name="rb_tab1_name">餐馆</string>
     <string name="rb_tab2_name">搜索</string>

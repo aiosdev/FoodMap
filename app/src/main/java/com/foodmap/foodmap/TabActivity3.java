@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.foodmap.foodmap.model.ClusterRestTbl;
 import com.foodmap.foodmap.model.MyItem;
 import com.foodmap.provider.DBHelper;
 import com.google.android.gms.appindexing.AppIndex;
@@ -39,7 +41,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
+import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
+import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,14 +51,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class TabActivity3 extends AppCompatActivity implements
+public class TabActivity3 extends FragmentActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnMarkerDragListener,
         GoogleMap.OnMapLongClickListener,
-        View.OnClickListener {
+        View.OnClickListener,
+        ClusterManager.OnClusterClickListener<ClusterRestTbl>,
+        ClusterManager.OnClusterInfoWindowClickListener<ClusterRestTbl>,
+        ClusterManager.OnClusterItemClickListener<ClusterRestTbl>,
+        ClusterManager.OnClusterItemInfoWindowClickListener<ClusterRestTbl> {
 
     private GoogleMap mMap;
     private Location location;
@@ -74,9 +83,10 @@ public class TabActivity3 extends AppCompatActivity implements
     //Google ApiClient
     private GoogleApiClient googleApiClient;
 
-    private ArrayList<RestaurantTbl> restaurantList;
+    private List<RestaurantTbl> restaurantList;
 
-    private ClusterManager<MyItem> mClusterManager;
+    private ClusterManager<ClusterRestTbl> mClusterManager;
+    private Random mRandom = new Random(1984);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +110,29 @@ public class TabActivity3 extends AppCompatActivity implements
                 .addApi(AppIndex.API)
                 .build();
 
+        restaurantList = new ArrayList<RestaurantTbl>();
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            String NAME = cursor.getString(1);
+            String ADDRESS = cursor.getString(4);
+            String POSTAL = cursor.getString(2);
+            String PICTURE = cursor.getString(5);
+            String TELEPHONE = cursor.getString(3);
+            String DESCRIPTION = cursor.getString(6);
+            String RESKIND = cursor.getString(7);
+            String LATITUDE = cursor.getString(8);
+            String LONGITUDE = cursor.getString(9);
+
+            //System.out.println("display class RestaurantTbl:----> " + NAME + ", " + ADDRESS + ", " + POSTAL + ", " + PICTURE + ", " + TELEPHONE + ", " + DESCRIPTION + ", " + RESKIND + ", " + LATITUDE + ", " + LONGITUDE);
+
+            RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE, LONGITUDE);
+            restaurantList.add(restaurant);
+        }
     }
-
-
 
     @Override
     protected void onStart() {
@@ -145,6 +175,9 @@ public class TabActivity3 extends AppCompatActivity implements
         AppIndex.AppIndexApi.end(googleApiClient, viewAction);
         */
     }
+
+
+
 
     //Getting current location
     private void getcurrentLocation() {
@@ -404,14 +437,23 @@ public class TabActivity3 extends AppCompatActivity implements
 
         // Add a marker in Montreal and move the camera
         LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
+        //LatLng latlng = new LatLng(45.4715234, -73.570739);
         mMap.addMarker(new MarkerOptions().position(latlng).draggable(true));
 
-        addMarkersToMap();
+        //addMarkersToMap();
 
-        mClusterManager = new ClusterManager<MyItem>(this, mMap);
-
+        mClusterManager = new ClusterManager<ClusterRestTbl>(this, mMap);
+        mClusterManager.setRenderer(new PersonRenderer());
         mMap.setOnCameraChangeListener(mClusterManager);
+        mMap.setOnMarkerClickListener(mClusterManager);
+        mMap.setOnInfoWindowClickListener(mClusterManager);
+        mClusterManager.setOnClusterClickListener(this);
+        mClusterManager.setOnClusterInfoWindowClickListener(this);
+        mClusterManager.setOnClusterItemClickListener(this);
+        mClusterManager.setOnClusterItemInfoWindowClickListener(this);
+
         readItems();
+        mClusterManager.cluster();
 
 
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
@@ -465,11 +507,93 @@ public class TabActivity3 extends AppCompatActivity implements
         //for (int i = 0; i < 10; i++) {
         //    double offset = i / 60d;
             for (RestaurantTbl resTemp : restaurantList) {
-                double lat = Double.parseDouble(resTemp.getLatitude());// + offset;
-                double lng = Double.parseDouble(resTemp.getLongitude());// + offset;
-                MyItem offsetItem = new MyItem(lat, lng);
-                mClusterManager.addItem(offsetItem);
+                double lat = Double.parseDouble(resTemp.getLatitude());
+                double lng = Double.parseDouble(resTemp.getLongitude());
+                String name = resTemp.getName();
+
+                //MyItem offsetItem = new MyItem(lat, lng);
+                ClusterRestTbl clusterRestTbl = new ClusterRestTbl(lat, lng, name);
+                mClusterManager.addItem(clusterRestTbl);
             }
        // }
+    }
+
+    /**
+     * Draws profile photos inside markers (using IconGenerator).
+     * When there are multiple people in the cluster, draw multiple photos (using MultiDrawable).
+     */
+    private class PersonRenderer extends DefaultClusterRenderer<ClusterRestTbl> {
+        //private final IconGenerator mIconGenerator = new IconGenerator(get);
+        //private final IconGenerator mClusterIconGenerator = new IconGenerator(getApplicationContext());
+        //private final ImageView mImageView;
+        //private final ImageView mClusterImageView;
+        //private final int mDimension;
+
+        public PersonRenderer() {
+            super(getApplicationContext(), mMap, mClusterManager);
+
+
+
+            //View multiProfile = getLayoutInflater().inflate(R.layout.multi_profile, null);
+            //mClusterIconGenerator.setContentView(multiProfile);
+            //mClusterImageView = (ImageView) multiProfile.findViewById(R.id.image);
+
+            //mImageView = new ImageView(getApplicationContext());
+            //mDimension = (int) getResources().getDimension(R.dimen.custom_profile_image);
+            //mImageView.setLayoutParams(new ViewGroup.LayoutParams(mDimension, mDimension));
+            //int padding = (int) getResources().getDimension(R.dimen.custom_profile_padding);
+            //mImageView.setPadding(padding, padding, padding, padding);
+            //mIconGenerator.setContentView(mImageView);
+        }
+
+        @Override
+        protected void onBeforeClusterItemRendered(ClusterRestTbl resTbl, MarkerOptions markerOptions) {
+            // Draw a single person.
+            // Set the info window to show their name.
+            //mImageView.setImageResource(person.profilePhoto);
+            //Bitmap icon = mIconGenerator.makeIcon();
+            markerOptions.title(resTbl.getName());
+        }
+
+        @Override
+        protected boolean shouldRenderAsCluster(Cluster cluster) {
+            // Always render clusters.
+            return cluster.getSize() > 1;
+        }
+    }
+
+
+
+    @Override
+    public boolean onClusterClick(Cluster<ClusterRestTbl> cluster) {
+        // Show a toast with some info when the cluster is clicked.
+        String firstName = String.valueOf(cluster.getItems().iterator().next().getLatitude()) + "," + cluster.getItems().iterator().next().getLongtitude();
+        Toast.makeText(this, cluster.getSize() + " (including " + firstName + ")", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+    @Override
+    public void onClusterInfoWindowClick(Cluster<ClusterRestTbl> cluster) {
+
+    }
+
+    @Override
+    public boolean onClusterItemClick(ClusterRestTbl clusterRestTbl) {
+        // Does nothing, but you could go into the user's profile page, for example.
+        Toast.makeText(this, clusterRestTbl.getName(), Toast.LENGTH_SHORT).show();
+        //.实现上拉窗口显示信息
+        return false;
+    }
+
+    @Override
+    public void onClusterItemInfoWindowClick(ClusterRestTbl clusterRestTbl) {
+
+    }
+    private LatLng position() {
+        return new LatLng(random(51.6723432, 51.38494009999999), random(0.148271, -0.3514683));
+    }
+
+    private double random(double min, double max) {
+        return mRandom.nextDouble() * (max - min) + min;
     }
 }

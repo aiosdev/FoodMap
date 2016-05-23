@@ -23,7 +23,11 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -39,6 +43,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -65,6 +70,8 @@ import java.util.List;
 public class BasicMapDemoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Location location;
+
     private RestaurantTbl restaurantTemp;
 
     private double fromLatitude;
@@ -81,7 +88,7 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         setContentView(R.layout.basic_demo);
 
         Intent intent3 = this.getIntent();
-        restaurantTemp =(RestaurantTbl)intent3.getSerializableExtra("resDetail");
+        restaurantTemp = (RestaurantTbl) intent3.getSerializableExtra("resDetail");
         System.out.println("22222222222222" + restaurantTemp.getName());
 
         lv = (LinearLayout) findViewById(R.id.ll_popupLayout);
@@ -90,8 +97,10 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         animation2 = AnimationUtils.loadAnimation(this,
                 R.anim.activity_close);
 
-        fromLatitude = 45.4715234;
-        fromLongitude = -73.570739;
+        //fromLatitude = 45.4715234;
+        //fromLongitude = -73.570739;
+
+
         toLatitude = Double.parseDouble(restaurantTemp.getLatitude());
         toLongitude = Double.parseDouble(restaurantTemp.getLongitude());
 
@@ -110,11 +119,24 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         //map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
         mMap = map;
-        updateMyLocation();
+        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String provider = service.getBestProvider(criteria, false);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        }
+        location = service.getLastKnownLocation(provider);
+
+        fromLatitude = location.getLatitude();
+        fromLongitude = location.getLongitude();
+
+
 
         final LatLng sydney = new LatLng(fromLatitude, fromLongitude);
         LatLng target = new LatLng(toLatitude, toLongitude);
-        map.addMarker(new MarkerOptions().position(sydney).title("Current Location"));
+        map.addMarker(new MarkerOptions().position(sydney).title(this.getString(R.string.current_loc)));
         map.addMarker(new MarkerOptions().position(target).title(restaurantTemp.getName()));
         //map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
@@ -156,7 +178,6 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
-
         String url = "http://maps.google.com/maps/api/directions/json?origin=" + fromLatitude + "," + fromLongitude + "&destination=" + toLatitude + "," + toLongitude + "&sensor=false&mode=driving";
         //Creating a string request
         StringRequest stringRequest = new StringRequest(url,
@@ -195,6 +216,7 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         }
+
     }
 
     //The parameter is the server response

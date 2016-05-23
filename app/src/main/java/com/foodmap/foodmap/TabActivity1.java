@@ -62,7 +62,7 @@ public class TabActivity1 extends ActionBarActivity  {
         //京东RunningMan动画效果，和本次Toolbar无关
         //mAnimationDrawable = (AnimationDrawable) ivRunningMan.getBackground();
         //mAnimationDrawable.start();
-        toolbar.setTitle("Toolbar");//设置Toolbar标题
+        toolbar.setTitle(R.string.resKind);//设置Toolbar标题
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用

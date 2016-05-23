@@ -6,7 +6,11 @@
     <string name="button_get_barcode">chercher</string>
     <string name="button_return">retourner</string>
 
+    <string name="resKind">Plus Options</string>
+
     <string name="enter">DEMARRER</string>
+
+    <string name="current_loc">Position actuelle</string>
 
     <string name="rb_tab1_name">Restaurant</string>
     <string name="rb_tab2_name">Chercher</string>

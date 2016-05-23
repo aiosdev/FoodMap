@@ -1,11 +1,14 @@
 package com.foodmap.foodmap;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.clustering.ClusterItem;
+
 import java.io.Serializable;
 
 /**
  * Created by guoecho on 2016/4/26.
  */
-public class RestaurantTbl implements Serializable {
+public class RestaurantTbl implements Serializable, ClusterItem {
 
     private String name;
     private String address;
@@ -115,5 +118,10 @@ public class RestaurantTbl implements Serializable {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public LatLng getPosition() {
+        return null;
     }
 }

@@ -158,6 +158,12 @@
             android:layout_gravity="right"
             android:text="Google Map"/>
 
+        <Button
+            android:id="@+id/bt_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拨打电话Call"/>
+
     </LinearLayout>
 
 </RelativeLayout>

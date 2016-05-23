@@ -14,10 +14,10 @@
     <string name="current_loc">当前位置</string>
 
     <string name="rb_tab1_name">餐馆</string>
-    <string name="rb_tab2_name">搜索</string>
-    <string name="rb_tab3_name">定位</string>
-    <string name="rb_tab4_name">配置</string>
-    <string name="rb_tab5_name">用户</string>
+    <string name="rb_tab2_name">更多</string>
+    <string name="rb_tab3_name">搜索</string>
+    <string name="rb_tab4_name">共享</string>
+    <string name="rb_tab5_name">关于</string>
 
     <string name="detail_info">餐馆信息 :</string>
     <string name="detail_info_name">名称 :</string>

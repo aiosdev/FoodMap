@@ -13,10 +13,10 @@
     <string name="current_loc">Position actuelle</string>
 
     <string name="rb_tab1_name">Restaurant</string>
-    <string name="rb_tab2_name">Chercher</string>
-    <string name="rb_tab3_name">Location</string>
-    <string name="rb_tab4_name">Configuration</string>
-    <string name="rb_tab5_name">usager Centre</string>
+    <string name="rb_tab2_name">Plus</string>
+    <string name="rb_tab3_name">Chercher</string>
+    <string name="rb_tab4_name">Partager</string>
+    <string name="rb_tab5_name">Sur Information</string>
 
     <string name="detail_info">Infomation De Restaurant :</string>
     <string name="detail_info_name">Nom De Restaurant :</string>

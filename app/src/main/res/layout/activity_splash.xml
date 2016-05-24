@@ -10,6 +10,6 @@
         android:adjustViewBounds="true"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
-        android:src="@mipmap/bean"/>
+        android:src="@mipmap/dimsum"/>
 
 </LinearLayout>

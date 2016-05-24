@@ -13,6 +13,11 @@
 
     <string name="current_loc">Current Location</string>
 
+    <string name="tv_1">蒙城美食地图 Version 1.01</string>
+    <string name="tv_2">开发者 Tao Sun , XinYuan Guo</string>
+    <string name="tv_3">搜罗整个蒙特利尔中餐馆信息，查找你喜爱的美食</string>
+    <string name="tv_4">欢迎提出宝贵建议和意见，开发者邮箱：aiosmtl@gmail.com</string>
+
     <string name="rb_tab1_name">Restaurant</string>
     <string name="rb_tab2_name">Search</string>
     <string name="rb_tab3_name">Location</string>

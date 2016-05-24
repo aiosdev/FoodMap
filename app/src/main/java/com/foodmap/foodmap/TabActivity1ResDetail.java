@@ -5,14 +5,16 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.InputStream;
+
+
 
 public class TabActivity1ResDetail extends AppCompatActivity {
     private RestaurantTbl restaurant;
@@ -57,11 +59,15 @@ public class TabActivity1ResDetail extends AppCompatActivity {
                 String number = (detail_number).getText().toString();
                 Intent intent3 = new Intent();
                 intent3.setAction(Intent.ACTION_CALL);
+//                intent3.setAction(Intent.ACTION_DIAL);
                 intent3.setData(Uri.parse("tel:" + number));
                 System.out.println("电话号码提取"+number);
                 startActivity(intent3);
             }
         });
+
+
+
 
         AssetManager assetManager = this.getAssets();
         try {

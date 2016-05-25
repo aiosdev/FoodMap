@@ -62,7 +62,7 @@ public class TabActivity1ResDetail extends AppCompatActivity {
                 intent3.setAction(Intent.ACTION_CALL);
 //                intent3.setAction(Intent.ACTION_DIAL);
                 intent3.setData(Uri.parse("tel:" + number));
-                System.out.println("电话号码提取"+number);
+//                System.out.println("电话号码提取"+number);
                 startActivity(intent3);
             }
         });

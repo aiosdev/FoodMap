@@ -22,7 +22,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.foodmap.provider.DBHelper;
 
@@ -169,7 +168,7 @@ public class TabActivity1 extends ActionBarActivity  {
 
             //通过吐丝对象显示出来。
             //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
 
             mDrawerLayout.closeDrawer(lvLeftMenu);
         }
@@ -217,7 +216,7 @@ public class TabActivity1 extends ActionBarActivity  {
             }
 
             //iv.setImageURI(Uri.parse("pic/"+restaurant.getImageUrl().toString()));
-            System.out.println("pic/" + restaurant.getImageUrl().toString());
+//            System.out.println("pic/" + restaurant.getImageUrl().toString());
             TextView tv_title = (TextView) view.findViewById(R.id.tv_title);
             tv_title.setText(restaurant.getName());
             TextView tv_number = (TextView) view.findViewById(R.id.tv_number);

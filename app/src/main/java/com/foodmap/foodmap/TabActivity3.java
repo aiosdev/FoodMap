@@ -210,9 +210,6 @@ public class TabActivity3 extends AppCompatActivity implements
         */
     }
 
-
-
-
     //Getting current location
     private void getcurrentLocation() {
         //mMap.clear();
@@ -394,7 +391,7 @@ public class TabActivity3 extends AppCompatActivity implements
             RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE,LONGITUDE);
             restaurantList.add(restaurant);
 
-            System.out.println("数据库已加载");
+//            System.out.println("数据库已加载");
 
             //把数据库中坐标取出
             /*
@@ -629,7 +626,7 @@ public class TabActivity3 extends AppCompatActivity implements
     @Override
     public boolean onClusterItemClick(final ClusterRestTbl clusterRestTbl) {
         // Does nothing, but you could go into the user's profile page, for example.
-        Toast.makeText(this, clusterRestTbl.getLatitude()+","+clusterRestTbl.getLongtitude(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, clusterRestTbl.getLatitude()+","+clusterRestTbl.getLongtitude(), Toast.LENGTH_SHORT).show();
         //System.out.println("bbbbbbbbbbbbbbaaaaaaaaaaaaa= " + clusterRestTbl.getName().toString());
         //.实现上拉窗口显示信息
 

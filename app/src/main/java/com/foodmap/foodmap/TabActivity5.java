@@ -25,7 +25,7 @@ public class TabActivity5 extends Activity {
 		GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
 		int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
 		String info = GoogleApiAvailability.getInstance().getOpenSourceSoftwareLicenseInfo(getApplicationContext());
-		System.out.println("wwwwwwwwwwwww"+resultCode+","+info);
+		System.out.println("wwwwwwwwwwwww"+resultCode+","+GoogleApiAvailability.getInstance());
 
 		if (resultCode == ConnectionResult.SUCCESS) {
 			//AlertDialog.Builder builder = new AlertDialog.Builder(TabActivity5.this);
@@ -33,7 +33,7 @@ public class TabActivity5 extends Activity {
 			//builder.setMessage(apiAvailability.getOpenSourceSoftwareLicenseInfo(this));
 			//builder.setPositiveButton("OK", null);
 			//builder.show();
-			info = apiAvailability.getOpenSourceSoftwareLicenseInfo(this);
+			//info = apiAvailability.getOpenSourceSoftwareLicenseInfo(this);
 			textView.setText(info);
 
 		}

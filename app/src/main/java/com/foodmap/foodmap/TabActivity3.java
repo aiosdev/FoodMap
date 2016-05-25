@@ -471,8 +471,8 @@ public class TabActivity3 extends AppCompatActivity implements
         Location location = service.getLastKnownLocation(provider);
 
         // Add a marker in Montreal and move the camera
-        //LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
-        LatLng latlng = new LatLng(45.4715234, -73.570739);
+        LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
+        //LatLng latlng = new LatLng(45.4715234, -73.570739);
         mMap.addMarker(new MarkerOptions().position(latlng).draggable(true));
 
         //addMarkersToMap();

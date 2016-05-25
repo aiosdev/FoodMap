@@ -14,11 +14,11 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -50,7 +50,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-
 import com.google.maps.android.SphericalUtil;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
@@ -64,8 +63,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import android.os.Handler;
-import java.util.logging.LogRecord;
 
 public class TabActivity3 extends AppCompatActivity implements
         OnMapReadyCallback,
@@ -475,7 +472,7 @@ public class TabActivity3 extends AppCompatActivity implements
         // Add a marker in Montreal and move the camera
         LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
         //LatLng latlng = new LatLng(45.4715234, -73.570739);
-        mMap.addMarker(new MarkerOptions().position(latlng).draggable(true));
+        mMap.addMarker(new MarkerOptions().position(latlng).title("My Position").draggable(true));
 
         //addMarkersToMap();
 

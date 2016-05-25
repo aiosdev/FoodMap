@@ -56,6 +56,7 @@ public class TabActivity1ResDetail extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 String number = (detail_number).getText().toString();
                 Intent intent3 = new Intent();
                 intent3.setAction(Intent.ACTION_CALL);
@@ -65,9 +66,6 @@ public class TabActivity1ResDetail extends AppCompatActivity {
                 startActivity(intent3);
             }
         });
-
-
-
 
         AssetManager assetManager = this.getAssets();
         try {
@@ -83,4 +81,8 @@ public class TabActivity1ResDetail extends AppCompatActivity {
         detail_postal.setText(restaurant.getPostal());
         detail_desc.setText(restaurant.getDescription());
     }
+
+
+
+
 }

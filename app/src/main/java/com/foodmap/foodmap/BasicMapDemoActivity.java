@@ -61,6 +61,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -234,8 +235,11 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         //Calculating the distance in meters
         Double distance = SphericalUtil.computeDistanceBetween(from, to);
 
+        DecimalFormat df = new DecimalFormat("#.00");
+        String res = df.format(distance);
+
         //Displaying the distance
-        Toast.makeText(this, String.valueOf(distance + "Meters"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, String.valueOf(res + "Meters"), Toast.LENGTH_LONG).show();
 
         try {
             //Parsing json

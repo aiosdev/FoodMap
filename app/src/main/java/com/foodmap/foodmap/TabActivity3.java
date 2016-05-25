@@ -3,18 +3,28 @@ package com.foodmap.foodmap;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -38,6 +48,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+
 import com.google.maps.android.SphericalUtil;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
@@ -47,11 +58,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import android.os.Handler;
+import java.util.logging.LogRecord;
 
-public class TabActivity3 extends FragmentActivity implements
+public class TabActivity3 extends AppCompatActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -86,16 +100,37 @@ public class TabActivity3 extends FragmentActivity implements
     private ClusterManager<ClusterRestTbl> mClusterManager;
     private Random mRandom = new Random(1984);
 
+    private LinearLayout lv;
+    private Animation animation1;
+    private Animation animation2;
+
+
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg){
+            super.handleMessage(msg);
+            RestaurantTbl resTemp = (RestaurantTbl) (msg.obj);
+            System.out.println("qqqqqqqqqqqqqqqqqqqq= " + resTemp.getName());
+        }
+    };
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_3);
 
+        lv = (LinearLayout) findViewById(R.id.cluster_popupLayout);
+        animation1 = AnimationUtils.loadAnimation(this,
+                R.anim.activity_open);
+        animation2 = AnimationUtils.loadAnimation(this,
+                R.anim.activity_close);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 //        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 //                .findFragmentById(R.id.map);
         SupportMapFragment mapFragment = ((SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map));
+                .findFragmentById(R.id.clusterMap));
         mapFragment.getMapAsync(this);
 
         //Initializing googleapi client
@@ -116,9 +151,9 @@ public class TabActivity3 extends FragmentActivity implements
 
         while (cursor.moveToNext()) {
             String NAME = cursor.getString(1);
-            String ADDRESS = cursor.getString(4);
-            String POSTAL = cursor.getString(2);
-            String PICTURE = cursor.getString(5);
+            String ADDRESS = cursor.getString(5);
+            String POSTAL = cursor.getString(4);
+            String PICTURE = cursor.getString(2);
             String TELEPHONE = cursor.getString(3);
             String DESCRIPTION = cursor.getString(6);
             String RESKIND = cursor.getString(7);
@@ -130,6 +165,8 @@ public class TabActivity3 extends FragmentActivity implements
             RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE, LONGITUDE);
             restaurantList.add(restaurant);
         }
+
+
     }
 
     @Override
@@ -434,8 +471,8 @@ public class TabActivity3 extends FragmentActivity implements
         Location location = service.getLastKnownLocation(provider);
 
         // Add a marker in Montreal and move the camera
-        LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
-        //LatLng latlng = new LatLng(45.4715234, -73.570739);
+        //LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
+        LatLng latlng = new LatLng(45.4715234, -73.570739);
         mMap.addMarker(new MarkerOptions().position(latlng).draggable(true));
 
         //addMarkersToMap();
@@ -477,6 +514,17 @@ public class TabActivity3 extends FragmentActivity implements
         //addMarkersToMap();
         CameraPosition camPosition = new CameraPosition.Builder().target(latlng).zoom(11).build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPosition));
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                //CameraPosition camPosition = new CameraPosition.Builder().target(sydney).zoom(14).build();
+                //mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPosition));
+                lv.setVisibility(View.GONE);
+                lv.setAnimation(animation2);
+            }
+        });
     }
 
 	@Override
@@ -508,9 +556,13 @@ public class TabActivity3 extends FragmentActivity implements
                 double lat = Double.parseDouble(resTemp.getLatitude());
                 double lng = Double.parseDouble(resTemp.getLongitude());
                 String name = resTemp.getName();
+                String address = resTemp.getAddress();
+                String phone = resTemp.getTelephone();
+                String des = resTemp.getDescription();
+                String photo = resTemp.getImageUrl();
 
                 //MyItem offsetItem = new MyItem(lat, lng);
-                ClusterRestTbl clusterRestTbl = new ClusterRestTbl(lat, lng, name);
+                ClusterRestTbl clusterRestTbl = new ClusterRestTbl(lat, lng, name, address, phone, des, photo);
                 mClusterManager.addItem(clusterRestTbl);
             }
        // }
@@ -565,8 +617,8 @@ public class TabActivity3 extends FragmentActivity implements
     @Override
     public boolean onClusterClick(Cluster<ClusterRestTbl> cluster) {
         // Show a toast with some info when the cluster is clicked.
-        String firstName = String.valueOf(cluster.getItems().iterator().next().getLatitude()) + "," + cluster.getItems().iterator().next().getLongtitude();
-        Toast.makeText(this, cluster.getSize() + " (including " + firstName + ")", Toast.LENGTH_SHORT).show();
+        //String firstName = String.valueOf(cluster.getItems().iterator().next().getLatitude()) + "," + cluster.getItems().iterator().next().getLongtitude();
+        Toast.makeText(this, cluster.getSize() + " restaurants", Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -576,10 +628,46 @@ public class TabActivity3 extends FragmentActivity implements
     }
 
     @Override
-    public boolean onClusterItemClick(ClusterRestTbl clusterRestTbl) {
+    public boolean onClusterItemClick(final ClusterRestTbl clusterRestTbl) {
         // Does nothing, but you could go into the user's profile page, for example.
         Toast.makeText(this, clusterRestTbl.getName(), Toast.LENGTH_SHORT).show();
+        //System.out.println("bbbbbbbbbbbbbbaaaaaaaaaaaaa= " + clusterRestTbl.getName().toString());
         //.实现上拉窗口显示信息
+
+        lv.setVisibility(View.VISIBLE);
+        lv.setAnimation(animation1);
+
+        TextView updown_des = (TextView) findViewById(R.id.updown_des);
+        TextView updown_address = (TextView) findViewById(R.id.updown_address);
+        TextView updown_number = (TextView) findViewById(R.id.updown_number);
+        ImageView updown_iv = (ImageView) findViewById(R.id.updown_iv);
+
+        updown_des .setText(clusterRestTbl.getDescription());
+        updown_address.setText(clusterRestTbl.getAddress());
+        updown_number.setText(clusterRestTbl.getTelephone());
+        AssetManager assetManager = getApplicationContext().getAssets();
+        try {
+            InputStream in = assetManager.open("pic/" + clusterRestTbl.getImageUrl());
+            Bitmap bmp = BitmapFactory.decodeStream(in);
+            updown_iv.setImageBitmap(bmp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /*
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message message = Message.obtain();
+                message.what = 1;
+                String ss = clusterRestTbl.toString();
+                message.obj = ss;
+                System.out.println("aaaaaaaaaaaaa= " + ss);
+                handler.sendMessage(message);
+            }
+        });
+        */
+
         return false;
     }
 

@@ -13,6 +13,9 @@
 
     <string name="current_loc">当前位置</string>
 
+    <string name="button_navigation">地图导航</string>
+    <string name="phone_call">拨打电话</string>
+
     <string name="rb_tab1_name">餐馆</string>
     <string name="rb_tab2_name">更多</string>
     <string name="rb_tab3_name">搜索</string>

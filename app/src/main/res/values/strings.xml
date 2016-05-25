@@ -13,6 +13,9 @@
 
     <string name="current_loc">Current Location</string>
 
+    <string name="button_navigation">Navigation</string>
+    <string name="phone_call">Phone Call</string>
+
     <string name="tv_1">蒙城美食地图 Version 1.01</string>
     <string name="tv_2">开发者 Tao Sun , XinYuan Guo</string>
     <string name="tv_3">搜罗整个蒙特利尔中餐馆信息，查找你喜爱的美食</string>

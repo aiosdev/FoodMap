@@ -2,6 +2,7 @@ package com.foodmap.foodmap;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.database.Cursor;
@@ -22,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -553,8 +555,8 @@ public class TabActivity3 extends AppCompatActivity implements
         //for (int i = 0; i < 10; i++) {
         //    double offset = i / 60d;
             for (RestaurantTbl resTemp : restaurantList) {
-                double lat = Double.parseDouble(resTemp.getLatitude());
-                double lng = Double.parseDouble(resTemp.getLongitude());
+                String lat = resTemp.getLatitude();
+                String lng = resTemp.getLongtitude();
                 String name = resTemp.getName();
                 String address = resTemp.getAddress();
                 String phone = resTemp.getTelephone();
@@ -630,7 +632,7 @@ public class TabActivity3 extends AppCompatActivity implements
     @Override
     public boolean onClusterItemClick(final ClusterRestTbl clusterRestTbl) {
         // Does nothing, but you could go into the user's profile page, for example.
-        Toast.makeText(this, clusterRestTbl.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, clusterRestTbl.getLatitude()+","+clusterRestTbl.getLongtitude(), Toast.LENGTH_SHORT).show();
         //System.out.println("bbbbbbbbbbbbbbaaaaaaaaaaaaa= " + clusterRestTbl.getName().toString());
         //.实现上拉窗口显示信息
 
@@ -641,6 +643,7 @@ public class TabActivity3 extends AppCompatActivity implements
         TextView updown_address = (TextView) findViewById(R.id.updown_address);
         TextView updown_number = (TextView) findViewById(R.id.updown_number);
         ImageView updown_iv = (ImageView) findViewById(R.id.updown_iv);
+        Button updown_bt = (Button) findViewById(R.id.updown_bt);
 
         updown_des .setText(clusterRestTbl.getDescription());
         updown_address.setText(clusterRestTbl.getAddress());
@@ -653,6 +656,21 @@ public class TabActivity3 extends AppCompatActivity implements
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        updown_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(getApplicationContext(), clusterRestTbl.getName(), Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("resDetail", clusterRestTbl);
+                intent2.putExtras(bundle);
+
+                intent2.setClass(TabActivity3.this,BasicMapDemoActivity.class);
+                startActivity(intent2);
+            }
+        });
 
         /*
         new Thread(new Runnable() {

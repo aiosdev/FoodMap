@@ -156,13 +156,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Map Navigation"/>
+            android:text="@string/button_navigation"/>
 
         <Button
             android:id="@+id/bt_call"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="拨打电话Call"/>
+            android:text="@string/phone_call"/>
 
     </LinearLayout>
 

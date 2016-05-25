@@ -12,6 +12,9 @@
 
     <string name="current_loc">Position actuelle</string>
 
+    <string name="button_navigation">Navigation</string>
+    <string name="phone_call">Appel téléphonique</string>
+
     <string name="rb_tab1_name">Restaurant</string>
     <string name="rb_tab2_name">Plus</string>
     <string name="rb_tab3_name">Chercher</string>

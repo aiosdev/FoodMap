@@ -13,17 +13,31 @@
         android:layout_alignParentBottom="true"
         android:background="@color/Indigo_nav_color">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/updown_linear">
+
         <ImageView
             android:id="@+id/updown_iv"
             android:layout_width="70dp"
             android:layout_height="100dp"/>
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/updown_bt"
+            android:layout_gravity="center"
+            android:text="@string/button_navigation"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/updown_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:layout_toRightOf="@+id/updown_iv"/>
+            android:layout_toRightOf="@+id/updown_linear"/>
 
         <TextView
             android:id="@+id/updown_number"
@@ -31,7 +45,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:layout_below="@+id/updown_address"
-            android:layout_toRightOf="@+id/updown_iv"
+            android:layout_toRightOf="@+id/updown_linear"
             android:lines="1"/>
 
         <TextView
@@ -40,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_below="@+id/updown_number"
-            android:layout_toRightOf="@+id/updown_iv"/>
+            android:layout_toRightOf="@+id/updown_linear"/>
 
     </RelativeLayout>
 

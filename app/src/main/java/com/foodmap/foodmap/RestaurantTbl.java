@@ -18,7 +18,7 @@ public class RestaurantTbl implements Serializable, ClusterItem {
     private String description;
     private String resKind;
     private String latitude;
-    private String longitude;
+    private String longtitude;
 
 
     public String getName() {
@@ -101,7 +101,11 @@ public class RestaurantTbl implements Serializable, ClusterItem {
         this.description = description;
         this.resKind = resKind;
         this.latitude = latitude;
-        this.longitude = longitude;
+        this.longtitude = longitude;
+    }
+
+    public RestaurantTbl(){
+
     }
 
     public String getLatitude() {
@@ -112,16 +116,17 @@ public class RestaurantTbl implements Serializable, ClusterItem {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
-        return longitude;
+    public String getLongtitude() {
+        return longtitude;
     }
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
+    public void setLongtitude(String longitude) {
+        this.longtitude = longitude;
     }
 
     @Override
     public LatLng getPosition() {
-        return null;
+        LatLng latlng = new LatLng(Double.parseDouble(this.latitude),Double.parseDouble(this.longtitude));
+        return latlng;
     }
 }

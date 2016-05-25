@@ -90,6 +90,8 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         Intent intent3 = this.getIntent();
         restaurantTemp = (RestaurantTbl) intent3.getSerializableExtra("resDetail");
         System.out.println("22222222222222" + restaurantTemp.getName());
+        System.out.println("22222222222222" + restaurantTemp.getLatitude());
+        System.out.println("22222222222222" + restaurantTemp.getLongtitude());
 
         lv = (LinearLayout) findViewById(R.id.ll_popupLayout);
         animation1 = AnimationUtils.loadAnimation(this,
@@ -102,7 +104,7 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
 
 
         toLatitude = Double.parseDouble(restaurantTemp.getLatitude());
-        toLongitude = Double.parseDouble(restaurantTemp.getLongitude());
+        toLongitude = Double.parseDouble(restaurantTemp.getLongtitude());
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -140,6 +142,7 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         map.addMarker(new MarkerOptions().position(target).title(restaurantTemp.getName()));
         //map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
+        /*
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -167,6 +170,7 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
+
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -177,6 +181,8 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
                 lv.setAnimation(animation2);
             }
         });
+        */
+
 
         String url = "http://maps.google.com/maps/api/directions/json?origin=" + fromLatitude + "," + fromLongitude + "&destination=" + toLatitude + "," + toLongitude + "&sensor=false&mode=driving";
         //Creating a string request

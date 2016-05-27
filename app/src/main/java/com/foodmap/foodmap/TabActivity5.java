@@ -27,6 +27,7 @@ public class TabActivity5 extends Activity {
 		String info = GoogleApiAvailability.getInstance().getOpenSourceSoftwareLicenseInfo(getApplicationContext());
 		System.out.println("wwwwwwwwwwwww"+resultCode+","+GoogleApiAvailability.getInstance());
 
+		/*
 		if (resultCode == ConnectionResult.SUCCESS) {
 			//AlertDialog.Builder builder = new AlertDialog.Builder(TabActivity5.this);
 			//builder.setTitle("About");
@@ -37,6 +38,7 @@ public class TabActivity5 extends Activity {
 			textView.setText(info);
 
 		}
+		*/
 	}
 
 }

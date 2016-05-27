@@ -1,16 +1,11 @@
 package com.foodmap.foodmap;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class TabActivity5 extends Activity {
 
@@ -22,6 +17,7 @@ public class TabActivity5 extends Activity {
 		setContentView(R.layout.tab_5);
 
 		textView = (TextView) findViewById(R.id.tv_5);
+		textView.setMovementMethod(ScrollingMovementMethod.getInstance());
 		GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
 		int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
 		String info = GoogleApiAvailability.getInstance().getOpenSourceSoftwareLicenseInfo(getApplicationContext());

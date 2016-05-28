@@ -35,6 +35,7 @@ public class TabActivity1ResDetail extends AppCompatActivity {
         TextView detail_desc = (TextView) findViewById(R.id.detail_desc);
 
         Button bt_map = (Button) findViewById(R.id.bt_map);
+        assert bt_map != null;
         bt_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,10 +63,10 @@ public class TabActivity1ResDetail extends AppCompatActivity {
                 intent3.setAction(Intent.ACTION_CALL);
 //                intent3.setAction(Intent.ACTION_DIAL);
                 intent3.setData(Uri.parse("tel:" + number));
-//                System.out.println("电话号码提取"+number);
                 startActivity(intent3);
             }
         });
+
 
         AssetManager assetManager = this.getAssets();
         try {
@@ -81,8 +82,5 @@ public class TabActivity1ResDetail extends AppCompatActivity {
         detail_postal.setText(restaurant.getPostal());
         detail_desc.setText(restaurant.getDescription());
     }
-
-
-
 
 }

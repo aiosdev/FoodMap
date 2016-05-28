@@ -15,6 +15,18 @@
     <string name="button_navigation">Navigation</string>
     <string name="phone_call">Appel téléphonique</string>
 
+    <string name="tv_1">Food Map  Version 1.01</string>
+    <string name="tv_2">Developer : Tao Sun , XinYuan Guo</string>
+    <string name="tv_3">Collecting the entire Montreal restaurant information, find your favorite food</string>
+    <string name="tv_4">Welcome to take some suggestions to us, Email ：aiosmtl@gmail.com</string>
+    <string name="tv_5">Terms of Service
+By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.
+1,You are responsible for your use of the Services, for any Content you provide, and for any consequences thereof, including the use of your Content by other users and our third party partners. You understand that your Content may be syndicated, broadcast, distributed, or published by our partners and if you do not have the right to submit Content for such use, it may subject you to liability.
+2,make no warranty or representation and disclaim all responsibility and liability for the completeness, accuracy, availability, timeliness, security or reliability of the Services or any Content. The original authers of Content own the copyright.
+3,These Terms are the entire and exclusive agreement between THIS app and you regarding the Services and these Terms supersede and replace any prior agreements between THIS app and you regarding the Services.
+4,All rights reserved.</string>
+
+
     <string name="rb_tab1_name">Restaurant</string>
     <string name="rb_tab2_name">Plus</string>
     <string name="rb_tab3_name">Chercher</string>

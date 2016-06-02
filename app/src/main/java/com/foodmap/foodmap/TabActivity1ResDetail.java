@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.InputStream;
 
@@ -36,19 +39,36 @@ public class TabActivity1ResDetail extends AppCompatActivity {
 
         Button bt_map = (Button) findViewById(R.id.bt_map);
         assert bt_map != null;
-        bt_map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent();
+        ConnectivityManager cManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo nInfo = cManager.getActiveNetworkInfo();
+        if(nInfo!=null && nInfo.isConnected()) {
+            Toast.makeText(this, "Network is available", Toast.LENGTH_LONG).show();
+            bt_map.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("resDetail", restaurant);
-                intent2.putExtras(bundle);
+                    Intent intent2 = new Intent();
 
-                intent2.setClass(TabActivity1ResDetail.this,BasicMapDemoActivity.class);
-                startActivity(intent2);
-            }
-        });
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("resDetail", restaurant);
+                    intent2.putExtras(bundle);
+
+                    intent2.setClass(TabActivity1ResDetail.this,BasicMapDemoActivity.class);
+                    startActivity(intent2);
+                }
+            });
+        } else {
+            bt_map.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),
+                            "Network is not available, please connect to network to use navigation", Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+
+
 
         //点击按钮直接拨号
         final Button bt_call = (Button) findViewById(R.id.bt_call);
@@ -61,7 +81,6 @@ public class TabActivity1ResDetail extends AppCompatActivity {
                 String number = (detail_number).getText().toString();
                 Intent intent3 = new Intent();
                 intent3.setAction(Intent.ACTION_CALL);
-//                intent3.setAction(Intent.ACTION_DIAL);
                 intent3.setData(Uri.parse("tel:" + number));
                 startActivity(intent3);
             }

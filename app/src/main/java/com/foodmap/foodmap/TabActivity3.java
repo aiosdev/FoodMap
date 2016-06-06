@@ -223,6 +223,8 @@ public class TabActivity3 extends AppCompatActivity implements
             //addMarkersToMap();
             CameraPosition camPosition = new CameraPosition.Builder().target(latlng).zoom(11).build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPosition));
+        } else{
+            this.finish();
         }
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {

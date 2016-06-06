@@ -217,6 +217,7 @@ public class TabActivity3 extends AppCompatActivity implements
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
+
             mMap.setMyLocationEnabled(true);
 
             //addMarkersToMap();

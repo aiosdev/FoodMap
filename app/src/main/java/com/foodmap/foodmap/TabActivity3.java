@@ -198,20 +198,6 @@ public class TabActivity3 extends AppCompatActivity implements
             LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
             mMap.addMarker(new MarkerOptions().position(latlng).title("My Position").draggable(true));
 
-            mClusterManager = new ClusterManager<ClusterRestTbl>(this, mMap);
-            mClusterManager.setRenderer(new PersonRenderer());
-            mMap.setOnCameraChangeListener(mClusterManager);
-            mMap.setOnMarkerClickListener(mClusterManager);
-            mMap.setOnInfoWindowClickListener(mClusterManager);
-            mClusterManager.setOnClusterClickListener(this);
-            mClusterManager.setOnClusterInfoWindowClickListener(this);
-            mClusterManager.setOnClusterItemClickListener(this);
-            mClusterManager.setOnClusterItemInfoWindowClickListener(this);
-
-            readItems();
-            mClusterManager.cluster();
-
-
             //enable currentLocation of default googleMap
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -223,9 +209,26 @@ public class TabActivity3 extends AppCompatActivity implements
             //addMarkersToMap();
             CameraPosition camPosition = new CameraPosition.Builder().target(latlng).zoom(11).build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPosition));
-        } else{
-            this.finish();
+
+        }else{
+            LatLng latlngoff = new LatLng(45.4626013, -73.6366949);
+
+            CameraPosition camPosition = new CameraPosition.Builder().target(latlngoff).zoom(11).build();
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPosition));
         }
+
+        mClusterManager = new ClusterManager<ClusterRestTbl>(this, mMap);
+        mClusterManager.setRenderer(new PersonRenderer());
+        mMap.setOnCameraChangeListener(mClusterManager);
+        mMap.setOnMarkerClickListener(mClusterManager);
+        mMap.setOnInfoWindowClickListener(mClusterManager);
+        mClusterManager.setOnClusterClickListener(this);
+        mClusterManager.setOnClusterInfoWindowClickListener(this);
+        mClusterManager.setOnClusterItemClickListener(this);
+        mClusterManager.setOnClusterItemInfoWindowClickListener(this);
+
+        readItems();
+        mClusterManager.cluster();
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override

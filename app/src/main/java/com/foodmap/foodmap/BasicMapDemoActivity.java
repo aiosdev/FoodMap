@@ -17,6 +17,8 @@
 package com.foodmap.foodmap;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -29,10 +31,19 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +54,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.foodmap.foodmap.model.GDPath;
+import com.foodmap.foodmap.model.GDRoute;
+import com.foodmap.foodmap.model.GDirectionRoutes;
+import com.foodmap.foodmap.utils.DirectionRoutesJSONParser;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -79,9 +94,17 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
     private double fromLongitude;
     private double toLatitude;
     private double toLongitude;
-    private LinearLayout lv;
-    private Animation animation1;
-    private Animation animation2;
+    //private LinearLayout lv;
+    //private Animation animation1;
+    //private Animation animation2;
+
+    private DrawerLayout mDrawerLayout;
+    private ExpandableListView mDrawerList;
+
+    private List<GDRoute> groupArray;//组列表
+    private  List<List<String>> childArray;//子列表
+
+    private GDirectionRoutes directionListTemp1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +117,19 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         System.out.println("22222222222222" + restaurantTemp.getLatitude());
         System.out.println("22222222222222" + restaurantTemp.getLongtitude());
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_expandable_listview);
+        mDrawerList = (ExpandableListView) findViewById(R.id.left_drawer);
+        groupArray =new ArrayList<GDRoute>();
+        childArray = new ArrayList<List<String>>();
+
+        /*
         lv = (LinearLayout) findViewById(R.id.ll_popupLayout);
         animation1 = AnimationUtils.loadAnimation(this,
                 R.anim.activity_open);
         animation2 = AnimationUtils.loadAnimation(this,
                 R.anim.activity_close);
+        */
 
-        //fromLatitude = 45.4715234;
-        //fromLongitude = -73.570739;
 
 
         toLatitude = Double.parseDouble(restaurantTemp.getLatitude());
@@ -134,6 +162,9 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
 
         fromLatitude = location.getLatitude();
         fromLongitude = location.getLongitude();
+
+        //fromLatitude = 45.4715234;
+        //fromLongitude = -73.570739;
 
 
 
@@ -185,7 +216,7 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         */
 
 
-        String url = "http://maps.google.com/maps/api/directions/json?origin=" + fromLatitude + "," + fromLongitude + "&destination=" + toLatitude + "," + toLongitude + "&sensor=false&mode=driving";
+        String url = "http://maps.google.com/maps/api/directions/json?origin=" + fromLatitude + "," + fromLongitude + "&destination=" + toLatitude + "," + toLongitude + "&alternatives=true&sensor=false&mode=driving";
         //Creating a string request
         StringRequest stringRequest = new StringRequest(url,
                 new Response.Listener<String>() {
@@ -195,6 +226,25 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
                         //loading.dismiss();
                         //Calling the method drawPath to draw the path
                         drawPath(response);
+
+                        DirectionRoutesJSONParser directionRoutesJSONParser = new DirectionRoutesJSONParser();
+                        JSONObject jsonObject = null;
+                        //JSONArray jsonArray =
+                        try {
+                            jsonObject = new JSONObject(response);
+                            System.out.println("dddddddddddddddd" + jsonObject.toString());
+                            directionListTemp1 =  directionRoutesJSONParser.parse(jsonObject);
+                            System.out.println("eeeeeeeeeeeeeeeeeee" + directionListTemp1.getRoutesList().size());
+
+                            initdate();
+                            //expandableListView_one.setAdapter(new ExpandableListViewaAdapter(ExpandableListDemo.this));
+                            mDrawerList.setAdapter(new ExpandableListViewaAdapter(BasicMapDemoActivity.this));
+
+                            //侧滑菜单初始为打开设置
+                            mDrawerLayout.openDrawer(GravityCompat.START);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -291,6 +341,163 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
 
         }
         return poly;
+    }
+
+    class ExpandableListViewaAdapter extends BaseExpandableListAdapter {
+        Activity activity;
+        public  ExpandableListViewaAdapter(Activity a)
+        {
+            activity = a;
+        }
+        /*-----------------Child */
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            // TODO Auto-generated method stub
+            return childArray.get(groupPosition).get(childPosition);
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            // TODO Auto-generated method stub
+            return childPosition;
+        }
+
+        @Override
+        public View getChildView(int groupPosition, int childPosition,
+                                 boolean isLastChild, View convertView, ViewGroup parent) {
+
+            String string =childArray.get(groupPosition).get(childPosition).toString();
+            //return getGenericView(string);
+
+            View view = convertView;
+
+            if(view == null) {
+                //另外一种解析XML布局文件的方式
+                LayoutInflater mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                view = mInflater.inflate(R.layout.content_expandable_child_view, null);
+            }
+
+            TextView childTextView1 = (TextView) view.findViewById(R.id.child_text1);
+            childTextView1.setText(String.valueOf(childPosition + 1) + " ");
+
+            TextView childTextView2 = (TextView) view.findViewById(R.id.child_text2);
+            childTextView2.setText(Html.fromHtml(string));
+
+            return view;
+
+        }
+
+        @Override
+        public int getChildrenCount(int groupPosition) {
+            // TODO Auto-generated method stub
+            return childArray.get(groupPosition).size();
+        }
+        /* ----------------------------Group */
+        @Override
+        public Object getGroup(int groupPosition) {
+            // TODO Auto-generated method stub
+            return getGroup(groupPosition);
+        }
+
+        @Override
+        public int getGroupCount() {
+            // TODO Auto-generated method stub
+            return groupArray.size();
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            // TODO Auto-generated method stub
+            return groupPosition;
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded,
+                                 View convertView, ViewGroup parent) {
+
+            String summary =groupArray.get(groupPosition).getSummary().toString();
+            String durantion = String.valueOf(groupArray.get(groupPosition).getLegsList().get(0).getmDuration());
+            String distance = String.valueOf(groupArray.get(groupPosition).getLegsList().get(0).getmDistance());
+            //return getGenericView(string);
+
+            View view = convertView;
+
+            if(view == null) {
+                //另外一种解析XML布局文件的方式
+                LayoutInflater mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                view = mInflater.inflate(R.layout.content_expandable_group_view, null);
+            }
+
+            TextView GroupTextView1 = (TextView) view.findViewById(R.id.group_text1);
+            GroupTextView1.setText("         " + summary + " ");
+
+            TextView GroupTextView2 = (TextView) view.findViewById(R.id.group_text2);
+            GroupTextView2.setText("   " + durantion + " ");
+
+            TextView GroupTextView3 = (TextView) view.findViewById(R.id.group_text3);
+            GroupTextView3.setText("   " + distance + " ");
+
+            return view;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition)
+        {
+            // TODO Auto-generated method stub
+            return true;
+        }
+
+        private TextView getGenericView(String string )
+        {
+            AbsListView.LayoutParams  layoutParams =new AbsListView.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            TextView  textView =new TextView(activity);
+            textView.setLayoutParams(layoutParams);
+
+            textView.setGravity(Gravity.CENTER_VERTICAL |Gravity.LEFT);
+
+            textView.setPadding(40, 0, 0, 0);
+            textView.setText(string);
+            return textView;
+        }
+    }
+
+    private void initdate()
+    {
+        //addInfo("  driving", new String[]{"Oracle","Java","Linux","Jquery"});
+        //addInfo("  walking", new String[]{"金钱","事业","权力","女人","房子","车","球"});
+        //addInfo("  bicycling", new String[]{"Oracle","Java","Linux","Jquery"});
+        //addInfo("  transit", new String[]{"Oracle","Java","Linux","Jquery"});
+        List<GDRoute> routes = directionListTemp1.getRoutesList();
+        for(int x=0;x<routes.size();x++) {
+            String currentSummary = routes.get(x).getSummary();
+            GDRoute currentRoute = routes.get(x);
+            addInfo(currentRoute);
+
+        }
+    }
+    private void addInfo(GDRoute child) {
+
+        //load data to group listView
+        groupArray.add(child);
+
+        //load data to child listView
+        List<String>  childItem =new ArrayList<String>();
+
+        List<GDPath> listPath = child.getLegsList().get(0).getPathsList();
+        for(int index=0;index<listPath.size();index++)
+        {
+            childItem.add(listPath.get(index).getHtmlText().toString());
+        }
+        childArray.add(childItem);
     }
 
 }

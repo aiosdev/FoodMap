@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.foodmap.provider.DBHelper;
+import com.foodmap.provider.SingletonList;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -89,6 +90,9 @@ public class TabActivity1 extends ActionBarActivity  {
 
         /*  处理滑动菜单结束     */
 
+        List<RestaurantTbl> restaurantsListTemp = SingletonList.getOneInstance().getRestaurantTblList(this);
+        System.out.println("SingletonList1========== " + restaurantsListTemp);
+        /*
         List<RestaurantTbl> restaurantsListTemp = new ArrayList<RestaurantTbl>();
         dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -111,7 +115,7 @@ public class TabActivity1 extends ActionBarActivity  {
             RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE, LONGITUDE);
             restaurantsListTemp.add(restaurant);
         }
-
+        */
 
         myAdapter = new MyAdapter(restaurantsListTemp, this);
 
@@ -131,10 +135,20 @@ public class TabActivity1 extends ActionBarActivity  {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             //通过单击事件，获得单击选项的内容
             //String text = lvLeftMenu.getItemAtPosition(position).toString();
-            List<RestaurantTbl> listTemp = new ArrayList<RestaurantTbl>();
-
+            //List<RestaurantTbl> listTemp = new ArrayList<RestaurantTbl>();
+            List<RestaurantTbl> listTemp = SingletonList.getOneInstance().getRestaurantTblList(getApplicationContext());
+            System.out.println("SingletonList2========== " + listTemp);
 
             String s = Integer.toString(position);
+
+            List<RestaurantTbl> listRes = new ArrayList<RestaurantTbl>();
+            if("0".equals(s)){
+                listRes = listTemp;
+            }else{
+                listRes = SingletonList.getOneInstance().getRestaurantTblList(s);
+            }
+
+            /*
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             //Cursor cursor = db.query("RestaurantTbl", null, null, null, null, null, null);
             Cursor cursor;
@@ -161,7 +175,8 @@ public class TabActivity1 extends ActionBarActivity  {
                 RestaurantTbl restaurant = new RestaurantTbl(NAME, ADDRESS, POSTAL, PICTURE, TELEPHONE, DESCRIPTION, RESKIND, LATITUDE,LONGITUDE);
                 listTemp.add(restaurant);
             }
-            myAdapter.refresh(listTemp);
+            */
+            myAdapter.refresh(listRes);
             listView.setAdapter(myAdapter);
 
 

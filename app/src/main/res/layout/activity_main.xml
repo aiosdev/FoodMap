@@ -7,14 +7,14 @@
     tools:context="com.foodmap.foodmap.MainActivity">
 
     <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text= "@string/hello"/>-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text= "@string/hello"/>-->
     <!--<Button-->
-        <!--android:id="@+id/bt1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/button_select"/>-->
-    
+    <!--android:id="@+id/bt1"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/button_select"/>-->
+
 
 </RelativeLayout>

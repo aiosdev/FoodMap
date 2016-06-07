@@ -105,7 +105,7 @@ public class TabActivity3 extends AppCompatActivity implements
         ConnectivityManager cManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
         NetworkInfo nInfo = cManager.getActiveNetworkInfo();
         if(nInfo!=null && nInfo.isConnected()) {
-            Toast.makeText(this, "Network is available", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "Network is available", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Network is not available, please connect to network to use map", Toast.LENGTH_LONG).show();
         }
@@ -204,7 +204,7 @@ public class TabActivity3 extends AppCompatActivity implements
                 return;
             }
 
-            mMap.setMyLocationEnabled(true);
+
 
             //addMarkersToMap();
             CameraPosition camPosition = new CameraPosition.Builder().target(latlng).zoom(11).build();
@@ -215,7 +215,11 @@ public class TabActivity3 extends AppCompatActivity implements
 
             CameraPosition camPosition = new CameraPosition.Builder().target(latlngoff).zoom(11).build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPosition));
+            Toast.makeText(this,"Cannot locate your position to use the navigation, please setup the configuration or network connection"
+                    ,Toast.LENGTH_LONG).show();
         }
+
+        mMap.setMyLocationEnabled(true);
 
         mClusterManager = new ClusterManager<ClusterRestTbl>(this, mMap);
         mClusterManager.setRenderer(new PersonRenderer());

@@ -21,15 +21,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -39,13 +35,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,14 +50,12 @@ import com.foodmap.foodmap.model.GDPath;
 import com.foodmap.foodmap.model.GDRoute;
 import com.foodmap.foodmap.model.GDirectionRoutes;
 import com.foodmap.foodmap.utils.DirectionRoutesJSONParser;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -75,7 +65,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -159,20 +148,21 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
             mMap.setMyLocationEnabled(true);
         }
         location = service.getLastKnownLocation(provider);
+        if (location != null) {
+            fromLatitude = location.getLatitude();
+            fromLongitude = location.getLongitude();
+            fromLatitude = location.getLatitude();
+            fromLongitude = location.getLongitude();
 
-        fromLatitude = location.getLatitude();
-        fromLongitude = location.getLongitude();
-
-        //fromLatitude = 45.4715234;
-        //fromLongitude = -73.570739;
+            //fromLatitude = 45.4715234;
+            //fromLongitude = -73.570739;
 
 
-
-        final LatLng sydney = new LatLng(fromLatitude, fromLongitude);
-        LatLng target = new LatLng(toLatitude, toLongitude);
-        map.addMarker(new MarkerOptions().position(sydney).title(this.getString(R.string.current_loc)));
-        map.addMarker(new MarkerOptions().position(target).title(restaurantTemp.getName()));
-        //map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            final LatLng sydney = new LatLng(fromLatitude, fromLongitude);
+            LatLng target = new LatLng(toLatitude, toLongitude);
+            map.addMarker(new MarkerOptions().position(sydney).title(this.getString(R.string.current_loc)));
+            map.addMarker(new MarkerOptions().position(target).title(restaurantTemp.getName()));
+            //map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         /*
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -216,50 +206,61 @@ public class BasicMapDemoActivity extends AppCompatActivity implements OnMapRead
         */
 
 
-        String url = "http://maps.google.com/maps/api/directions/json?origin=" + fromLatitude + "," + fromLongitude + "&destination=" + toLatitude + "," + toLongitude + "&alternatives=true&sensor=false&mode=driving";
-        //Creating a string request
-        StringRequest stringRequest = new StringRequest(url,
-                new Response.Listener<String>() {
+            String url = "http://maps.google.com/maps/api/directions/json?origin=" + fromLatitude + "," + fromLongitude + "&destination=" + toLatitude + "," + toLongitude + "&alternatives=true&sensor=false&mode=driving";
+            //Creating a string request
+            StringRequest stringRequest = new StringRequest(url,
+                    new Response.Listener<String>() {
 
-                    @Override
-                    public void onResponse(String response) {
-                        //loading.dismiss();
-                        //Calling the method drawPath to draw the path
-                        drawPath(response);
+                        @Override
+                        public void onResponse(String response) {
+                            //loading.dismiss();
+                            //Calling the method drawPath to draw the path
+                            drawPath(response);
 
-                        DirectionRoutesJSONParser directionRoutesJSONParser = new DirectionRoutesJSONParser();
-                        JSONObject jsonObject = null;
-                        //JSONArray jsonArray =
-                        try {
-                            jsonObject = new JSONObject(response);
-                            System.out.println("dddddddddddddddd" + jsonObject.toString());
-                            directionListTemp1 =  directionRoutesJSONParser.parse(jsonObject);
-                            System.out.println("eeeeeeeeeeeeeeeeeee" + directionListTemp1.getRoutesList().size());
+                            DirectionRoutesJSONParser directionRoutesJSONParser = new DirectionRoutesJSONParser();
+                            JSONObject jsonObject = null;
+                            //JSONArray jsonArray =
+                            try {
+                                jsonObject = new JSONObject(response);
+                                System.out.println("dddddddddddddddd" + jsonObject.toString());
+                                directionListTemp1 = directionRoutesJSONParser.parse(jsonObject);
+                                System.out.println("eeeeeeeeeeeeeeeeeee" + directionListTemp1.getRoutesList().size());
 
-                            initdate();
-                            //expandableListView_one.setAdapter(new ExpandableListViewaAdapter(ExpandableListDemo.this));
-                            mDrawerList.setAdapter(new ExpandableListViewaAdapter(BasicMapDemoActivity.this));
+                                initdate();
+                                //expandableListView_one.setAdapter(new ExpandableListViewaAdapter(ExpandableListDemo.this));
+                                mDrawerList.setAdapter(new ExpandableListViewaAdapter(BasicMapDemoActivity.this));
 
-                            //侧滑菜单初始为打开设置
-                            mDrawerLayout.openDrawer(GravityCompat.START);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                                //侧滑菜单初始为打开设置
+                                mDrawerLayout.openDrawer(GravityCompat.START);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //loading.dismiss();
-                    }
-                });
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //loading.dismiss();
+                        }
+                    });
 
-        //Adding the request to request queue
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-        //MarkerOptions myMarkerOptions = new MarkerOptions();
-        CameraPosition camPosition = new CameraPosition.Builder().target(sydney).zoom(14).build();
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPosition));
+            //Adding the request to request queue
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+            //MarkerOptions myMarkerOptions = new MarkerOptions();
+            CameraPosition camPosition = new CameraPosition.Builder().target(sydney).zoom(14).build();
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPosition));
+        } else {
+//            Intent intent = new Intent();
+//            Intent intentFrom = getIntent();
+//            String className = intentFrom.getComponent().getClassName();
+//            intent.setClass(BaseMapDemoActivity.this, className.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+            Toast.makeText(this, "Cannot locate your position to use the navigation, please setup the configuration or network connection",
+                    Toast.LENGTH_LONG).show();
+            this.finish();
+        }
     }
 
     public void onMyLocationToggled(View view) {

@@ -102,4 +102,5 @@ public class TabActivity1ResDetail extends AppCompatActivity {
         detail_desc.setText(restaurant.getDescription());
     }
 
+
 }
